@@ -41,7 +41,11 @@ public class Book {
 		return availability;
 	}
 
-	public void setCheckedOut(BookStatus availability) {
+	public BookStatus getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(BookStatus availability) {
 		this.availability = availability;
 	}
 

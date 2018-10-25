@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Book {
 
-	String title;
-	String author;
-	BookStatus availability;
-	Date dueDate;
-	String genre;
+	private String title;
+	private String author;
+	private BookStatus availability;
+	private Date dueDate;
+	private String genre;
 
 	public Book() {
 	}
@@ -35,10 +35,6 @@ public class Book {
 
 	public void setAuthor(String author) {
 		this.author = author;
-	}
-
-	public BookStatus isCheckedOut() {
-		return availability;
 	}
 
 	public BookStatus getAvailability() {

@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -13,7 +15,7 @@ import java.util.List;
 public class BookTextFile {
 
 	// displays list of file
-	public static List<Book> readFile(Path filePath) {
+	public static List<Book> readFile(Path filePath) throws ParseException {
 		List<Book> books = new ArrayList<>();
 		// ** Example of reading a file into a list
 		try {
@@ -35,15 +37,16 @@ public class BookTextFile {
 // Modify this method as necessary to convert a line of text from the file to a
 	// new item instance
 
-	public static Book convertLineToItem(String line) {
+	public static Book convertLineToItem(String line) throws ParseException {
 		String[] parts = line.split("\t");
 		String title = parts[0];
 		String author = parts[1];
 
 		// fix issue
-		BookStatus available = String.valueOf(parts[2]);
+		BookStatus available = BookStatus.valueOf(parts[2]);
 		// fix issue
-		Date date = String.valueOf(parts[3]);
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = format.parse(parts[2]);
 		String genre = parts[4];
 
 		Book book = new Book(title, author, available, date, genre);

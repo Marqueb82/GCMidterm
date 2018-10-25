@@ -12,9 +12,10 @@ public class LibraryApp {
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println("What can we do for you today?");
 		
-		boolean valid = false;
+		int userResponse;
 		
 		do {
+			
 			System.out.println(" 1.	See a list of books.");
 			System.out.println(" 2. Select a genre.");
 			System.out.println(" 3. Search by author.");
@@ -23,11 +24,36 @@ public class LibraryApp {
 			System.out.println(" 6. Return a book.");
 			System.out.println(" 7. Exist Grand Chirpus Directory.");
 			
-			int userResponse = userInput.nextInt();
+			 userResponse = userInput.nextInt();
+			switch(userResponse) {//the value being checked for
+			case 1: 
+				//TODO method for booklist
+				break;
+			case 2: 
+				//TODO method for genre 
+				break;
+			case 3:
+				//TODO Author 
+				break;
+			case 4:
+				//TODO title keyword 
+				break;
+			case 5:
+				//TODO book to checkout
+				break;
+			case 6:
+				//TODO return a book
+				break;
+			case 7: 
+				System.out.println("Enjoy reading!");
+				System.exit(0);
+				break;
+				
+			}
+	
 			
 			
-			
-		}while (!valid);
+		}while (userResponse != 7);
 		
 		
 		userInput.close();

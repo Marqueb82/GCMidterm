@@ -3,16 +3,17 @@ package gc_midterm;
 import java.util.Date;
 
 public class Book {
-	
+
 	String title;
 	String author;
-	boolean availability;
+	BookStatus availability;
 	Date dueDate;
 	String genre;
-	
-	public Book () {}
 
-	public Book(String title, String author, boolean checkedOut, Date dueDate) {
+	public Book() {
+	}
+
+	public Book(String title, String author, BookStatus checkedOut, Date dueDate, String genre) {
 		this.title = title;
 		this.author = author;
 		this.availability = checkedOut;
@@ -51,17 +52,15 @@ public class Book {
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
-	
+
 	public String getGenre() {
 		return genre;
 	}
-	
+
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	
+
 	// TODO toString
-	
-	
 
 }

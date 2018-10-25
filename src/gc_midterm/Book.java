@@ -13,10 +13,10 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(String title, String author, BookStatus checkedOut, Date dueDate, String genre) {
+	public Book(String title, String author, BookStatus availability, Date dueDate, String genre) {
 		this.title = title;
 		this.author = author;
-		this.availability = checkedOut;
+		this.availability = availability;
 		this.dueDate = dueDate;
 		this.genre = genre;
 	}
@@ -37,12 +37,12 @@ public class Book {
 		this.author = author;
 	}
 
-	public boolean isCheckedOut() {
+	public BookStatus getAvailability() {
 		return availability;
 	}
 
-	public void setCheckedOut(boolean checkedOut) {
-		this.availability = checkedOut;
+	public void setAvailability(BookStatus availability) {
+		this.availability = availability;
 	}
 
 	public Date getDueDate() {

@@ -46,7 +46,7 @@ public class BookTextFile {
 		BookStatus available = BookStatus.valueOf(parts[2]);
 		// fix issue
 		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = format.parse(parts[2]);
+		Date date = format.parse(parts[3]);
 		String genre = parts[4];
 
 		Book book = new Book(title, author, available, date, genre);

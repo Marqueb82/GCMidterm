@@ -81,7 +81,8 @@ public class LibraryApp {
 				keywordInBooklist();
 				break;
 			case 5:
-				// TODO book to checkout
+				// calls method to check out book
+				checkOutBook();
 				break;
 			case 6:
 				// TODO return a book
@@ -99,6 +100,18 @@ public class LibraryApp {
 		 * if (Arrays.equals(array1, array2)) { System.out.println("EQUAL"); } else {
 		 * System.out.println("NOT EQUAL");
 		 */// layout we can use for book availability
+
+	public static void checkOutBook() throws IOException, ParseException {
+		List<Book> completeList = new ArrayList<>();
+		completeList = btf.showBooks();
+		int i = 0;
+
+		System.out.println("Please select a book to check: ");
+		for (Book book : completeList) {
+			System.out.println((i + 1) + ". " + book.getTitle() + " by " + book.getAuthor());
+		}
+
+	}
 
 	public static void keywordInBooklist() {
 		List<Book> completeList = new ArrayList<>();
@@ -151,31 +164,28 @@ public class LibraryApp {
 				isValid = false;
 			}
 		} while (!isValid);
-
-
-//		for (Book book : keywordIncluded)
-//			for (Book book : keywordIncluded) {
-//				System.out.println(String.format("Books: %-25s Author: %50s", book.getTitle() + book.getAuthor()));
-//			}
-	}
-
-	/*
-	 * public List<Book> searchGenre(List<Book> ourBooks) { List<Book> booklist =
-	 * new ArrayList<>(); booklist = btf.showBooks();
-	 */
-	// TODO create a menu with genre titles
-	// for (int i = 0; i < booklist.size(); i++) {
-
 	}
 
 //	public List<Book> searchGenre(List<Book> ourBooks) {
 //		List<Book> booklist = new ArrayList<>();
+//		booklist = btf.showBooks();
+//
+//		// TODO create a menu with genre titles
+//		for (int i = 0; i < booklist.size(); i++) {
 
-		boolean userResponse;
-			return genre;
-		}
-
-}
+//		List of Books		
+//		booklist.get(0);
+//		booklist.get(1);
+//		booklist.get(2);
+//		booklist.get(3);
+//		booklist.get(4);
+//		booklist.get(5);
+//		booklist.get(6);
+//		booklist.get(7);
+//		booklist.get(8);
+//		booklist.get(9);
+//		booklist.get(10);
+//		booklist.get(11);
 
 //			boolean userResponse;
 //		}

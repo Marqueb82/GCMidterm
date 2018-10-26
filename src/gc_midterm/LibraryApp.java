@@ -1,13 +1,10 @@
 package gc_midterm;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import com.sun.xml.internal.fastinfoset.algorithm.BooleanEncodingAlgorithm;
 
 public class LibraryApp {
 
@@ -16,52 +13,52 @@ public class LibraryApp {
 	private static Scanner userInput = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException, ParseException {
-		// TODO Auto-generated method stub
-		
 
 		System.out.println("Welcome to Grand Chirpus library!");
-		System.out.println("What can we do for you today?");
+		System.out.println("How can we help you today?");
 
 		int userResponse;
 
-		// will show book list
-		List<Book> ourBooks = btf.showBooks();
-		for (Book b : ourBooks) {
-			System.out.println(b.getTitle() + " " + b.getAuthor() + " " + b.getAvailability() + " " + b.getDueDate()
-					+ " " + b.getGenre());
-		}
+//		// will show book list
+//		List<Book> ourBooks = btf.showBooks();
+//		for (Book b : ourBooks) {
+//			System.out.println(b.getTitle() + " " + b.getAuthor() + " " + b.getAvailability() + " " + b.getDueDate()
+//					+ " " + b.getGenre());
+//		}
 
 		/*
 		 * Adding book testing from BookTextFile
 		 */
-		System.out.println("\nEnter book title");
-		String title = userInput.next();
-		System.out.println("\nEnter book author");
-		String author = userInput.nextLine();
-		userInput.nextLine();
-		System.out.println("\nEnter book status");
-		BookStatus available = BookStatus.valueOf(userInput.next());
-		System.out.println("\nEnter book due date");
-		Date dueDate = Date.valueOf(userInput.next());
-		System.out.println("\nEnter book genre");
-		String bookGenre = userInput.next();
+//		System.out.println("\nEnter book title");
+//		String title = userInput.next();
+//		System.out.println("\nEnter book author");
+//		String author = userInput.nextLine();
+//		userInput.nextLine();
+//		System.out.println("\nEnter book status");
+//		BookStatus available = BookStatus.valueOf(userInput.next());
+//		System.out.println("\nEnter book due date");
+//		Date dueDate = Date.valueOf(userInput.next());
+//		System.out.println("\nEnter book genre");
+//		String bookGenre = userInput.next();
 
-		Book b = new Book(title, author, available, dueDate, bookGenre);
-
-		btf.appendToFile(b);
-
-		String name = "As a Man Thinketh";
-		btf.removeFromFile(name);
+//		Book b = new Book(title, author, available, dueDate, bookGenre);
+//
+//		btf.appendToFile(b);
+//
+//		String name = "As a Man Thinketh";
+//		btf.removeFromFile(name);
 
 		do {
 
-			System.out.println(" 1.	See a list of books.");
+			System.out.println("");
+			System.out.println(" 1. See a list of books.");
 			System.out.println(" 2. Select a genre.");
 			System.out.println(" 3. Search by author.");
-			System.out.println(" 4. Search by title keyword.");
+			System.out.println(" 4. Search by keyword.");
 			System.out.println(" 5. Select a book to checkout.");
 			System.out.println(" 6. Return a book.");
-			System.out.println(" 7. Exist Grand Chirpus Directory.");
+			System.out.println(" 7. Exit Grand Chirpus Directory.");
+			System.out.println("\n Please select the number that you would like explore: ");
 
 			userResponse = userInput.nextInt();
 			switch (userResponse) {// the value being checked for
@@ -79,7 +76,8 @@ public class LibraryApp {
 				// TODO Author
 				break;
 			case 4:
-				// TODO title keyword
+				// calls method to find keywords
+				keywordInBooklist();
 				break;
 			case 5:
 				// TODO book to checkout
@@ -100,9 +98,7 @@ public class LibraryApp {
 	}/*
 		 * if (Arrays.equals(array1, array2)) { System.out.println("EQUAL"); } else {
 		 * System.out.println("NOT EQUAL");
-		 */// layout we can use for bookavailability
-
-	}
+		 */// layout we can use for book availability
 
 	public static void keywordInBooklist() {
 		List<Book> completeList = new ArrayList<>();
@@ -116,12 +112,26 @@ public class LibraryApp {
 
 				// creates a list to cycle through
 				completeList = btf.showBooks();
+
+				// create an option to sort through authors or books with keyword
+				System.out.println("Would you like to search through authors or titles? ");
+				String userResponse = userInput.nextLine();
+
 				// cycles through the list to add to a new list of just books with that key word
 				for (Book book : completeList) {
-					if (book.getAuthor().contains(userKeyword) || book.getTitle().contains(userKeyword)) {
-						keywordIncluded.add(book);
-					} else {
-						System.out.println("Sorry there are no books containing that keyword.");
+					// sorts either authors or titles
+					if (userResponse.toLowerCase().equals("authors")) {
+						if (book.getAuthor().contains(userKeyword)) {
+							keywordIncluded.add(book);
+						} else {
+							System.out.println("Sorry, there are no authors containing that keyword.");
+						}
+					} else if (userResponse.toLowerCase().contains("title")) {
+						if (book.getTitle().contains(userKeyword)) {
+							keywordIncluded.add(book);
+						} else {
+							System.out.println("Sorry, there are no authors containing that keyword.");
+						}
 					}
 				}
 				isValid = true;
@@ -132,6 +142,7 @@ public class LibraryApp {
 			}
 		} while (!isValid);
 
+<<<<<<< HEAD
 		for (Book book : keywordIncluded)
 			System.out.println(Book.getTitle() + get);
 	
@@ -161,6 +172,11 @@ public class LibraryApp {
 		
 		boolean userResponse;
 		
+=======
+		for (Book book : keywordIncluded) {
+			System.out.println(String.format("Books: %-25s Author: %-25s", book.getTitle() + book.getAuthor()));
+		}
+>>>>>>> 25bfe8db45f266ad860abccffa85efeca45076ba
 	}
 
 } 

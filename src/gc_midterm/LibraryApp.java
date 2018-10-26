@@ -17,7 +17,6 @@ public class LibraryApp {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		// TODO Auto-generated method stub
-		
 
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println("What can we do for you today?");

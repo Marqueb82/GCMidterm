@@ -40,6 +40,7 @@ public class BookTextFile {
 				b.setDueDate(new SimpleDateFormat("MM/dd/yyyy").parse(parts[3]));
 				b.setGenre(parts[4]);
 				books.add(b);
+				System.out.println(b);
 			}
 			return books;
 		} catch (NoSuchFileException ex) {

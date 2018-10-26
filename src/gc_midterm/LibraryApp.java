@@ -90,6 +90,11 @@ public class LibraryApp {
 		} while (userResponse != 7);
 
 		userInput.close();
+	}/*if (Arrays.equals(array1, array2)) {
+		System.out.println("EQUAL");
+	} else {
+		System.out.println("NOT EQUAL");*///layout we can use for bookavailability
 	}
+	
 
 }

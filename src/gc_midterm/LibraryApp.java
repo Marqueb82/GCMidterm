@@ -28,16 +28,20 @@ public class LibraryApp {
 					+ " " + b.getGenre());
 		}
 
+		/*
+		 * Adding book testing from BookTextFile
+		 */
 		System.out.println("\nEnter book title");
-		String title = userInput.nextLine();
+		String title = userInput.next();
 		System.out.println("\nEnter book author");
 		String author = userInput.nextLine();
+		userInput.nextLine();
 		System.out.println("\nEnter book status");
-		BookStatus available = BookStatus.valueOf(userInput.nextLine());
+		BookStatus available = BookStatus.valueOf(userInput.next());
 		System.out.println("\nEnter book due date");
-		Date dueDate = userInput.nextLine();
+		Date dueDate = Date.valueOf(userInput.next());
 		System.out.println("\nEnter book genre");
-		String bookGenre = userInput.nextLine();
+		String bookGenre = userInput.next();
 
 		Book b = new Book(title, author, available, dueDate, bookGenre);
 
@@ -58,14 +62,14 @@ public class LibraryApp {
 
 			userResponse = userInput.nextInt();
 			switch (userResponse) {// the value being checked for
-			case 1://trying a for loop out.
-				for(int i = 0; i < bookList.Size(); i++){
-				    System.out.println(booklist.get(i).toString();
-				}
-				// TODO method for book list
+			case 1:// trying a for loop out.
+					// for(int i = 0; i < bookList.Size(); i++){
+					// System.out.println(booklist.get(i).toString();
+					// }
+					// TODO method for book list
 				break;
 			case 2:
-				
+
 				// TODO method for genres: Self-Help, Fiction, Non-Fiction
 				break;
 			case 3:

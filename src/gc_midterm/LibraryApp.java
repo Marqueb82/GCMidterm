@@ -92,19 +92,23 @@ public class LibraryApp {
 		} while (userResponse != 7);
 
 		userInput.close();
-	}/*if (Arrays.equals(array1, array2)) {
-		System.out.println("EQUAL");
-	} else {
-		System.out.println("NOT EQUAL");*///layout we can use for bookavailability
+	}/*
+		 * if (Arrays.equals(array1, array2)) { System.out.println("EQUAL"); } else {
+		 * System.out.println("NOT EQUAL");
+		 */// layout we can use for bookavailability
+
 	}
-	
 
 	public List<Book> keywordInBooklist() {
+		List<Book> books = new ArrayList<>();
 		List<Book> keywordIncluded = new ArrayList<>();
+
 		boolean isValid = false;
 		do {
 			try {
-				keywordIncluded = btf.showBooks();
+				// creates a list to cycle through
+				books = btf.showBooks();
+				// cycles through the list to add to a new list of just books
 				isValid = true;
 			} catch (IOException | ParseException e) {
 				// prints error and has user try again

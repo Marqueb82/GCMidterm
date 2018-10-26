@@ -90,7 +90,6 @@ public class LibraryApp {
 				System.out.println("Enjoy reading!");
 				System.exit(0);
 				break;
-
 			}
 
 		} while (userResponse != 7);
@@ -136,7 +135,6 @@ public class LibraryApp {
 							keywordIncluded.add(book);
 							System.out.println(book.getTitle() + book.getAuthor());
 						}
-
 					}
 
 					if (keywordIncluded == null) {

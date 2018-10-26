@@ -107,6 +107,9 @@ public class LibraryApp {
 		boolean isValid = false;
 		do {
 			try {
+				// creates a list to cycle through
+				completeList = btf.showBooks();
+
 				userInput.nextLine();
 				System.out.println("Please enter a keyword to search: ");
 				String userKeyword = userInput.nextLine();
@@ -124,16 +127,23 @@ public class LibraryApp {
 					if (userResponse.toLowerCase().equals("authors")) {
 						if (book.getAuthor().contains(userKeyword)) {
 							keywordIncluded.add(book);
-						} else {
-							System.out.println("Sorry, there are no authors containing that keyword.");
 						}
 					} else if (userResponse.toLowerCase().contains("title")) {
 						if (book.getTitle().contains(userKeyword)) {
 							keywordIncluded.add(book);
-						} else {
-							System.out.println("Sorry, there are no authors containing that keyword.");
 						}
 					}
+
+					if (keywordIncluded == null) {
+						System.out.println("Sorry, there are no authors containing that keyword.");
+					} else {
+						for (Book sortedBook : keywordIncluded) {
+							System.out.println(String.format("Books: %45s Author: %75s",
+									sortedBook.getTitle() + sortedBook.getAuthor()));
+						}
+
+					}
+
 				}
 				// allows user to quit loop
 				isValid = true;
@@ -144,19 +154,14 @@ public class LibraryApp {
 				isValid = false;
 			}
 		} while (!isValid);
-
-		for (Book book : keywordIncluded)
-			for (Book book : keywordIncluded) {
-				System.out.println(String.format("Books: %-25s Author: %50s", book.getTitle() + book.getAuthor()));
-			}
 	}
 
-	public List<Book> searchGenre(List<Book> ourBooks) {
-		List<Book> booklist = new ArrayList<>();
-		booklist = btf.showBooks();
-
-		// TODO create a menu with genre titles
-		for (int i = 0; i < booklist.size(); i++) {
+//	public List<Book> searchGenre(List<Book> ourBooks) {
+//		List<Book> booklist = new ArrayList<>();
+//		booklist = btf.showBooks();
+//
+//		// TODO create a menu with genre titles
+//		for (int i = 0; i < booklist.size(); i++) {
 
 //		List of Books		
 //		booklist.get(0);
@@ -172,9 +177,9 @@ public class LibraryApp {
 //		booklist.get(10);
 //		booklist.get(11);
 
-			boolean userResponse;
-		}
-
-	}
+//			boolean userResponse;
+//		}
+//
+//	}
 
 }

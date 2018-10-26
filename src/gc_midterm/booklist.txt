@@ -5,3 +5,4 @@ The New Jim Crow	Michelle Alexander	ONSHELF	10/28/2018	Non-Fiction	Criminal Just
 1984	George Orwell	ONSHELF	10/20/2018	Fiction	Science Fiction	Classic
 Crime and Punishment	Fyodor Dostoyevsky	CHECKEDOUT	10/18/2018	Fiction	Classic
 Slaughterhouse-Five	Kurt Vonnegut	ONSHELF	10/22/2018	Fiction	Science Fiction
+Test	 Book	ONSHELF	2018-11-15	SciFi

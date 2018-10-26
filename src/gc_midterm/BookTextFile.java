@@ -57,14 +57,15 @@ public class BookTextFile {
 	 * @param filePath
 	 * @throws IOException
 	 */
-	public void appendToFile(String item) throws IOException {
+	public void appendToFile(Book item) throws IOException {
 		if (Files.notExists(filePath)) {
 			Files.createFile(filePath);
 		}
 
 		// Create a list with the user's book in it
-		List<String> linesToAdd = Arrays.asList(item);
-		// Write those lines to the end of the file
+		String line = item.getTitle() + "\t" + item.getAuthor() + "\t" + item.getAvailability() + "\t"
+				+ item.getDueDate() + "\t" + item.getGenre();
+		List<String> linesToAdd = Arrays.asList(line);
 		Files.write(filePath, linesToAdd, StandardOpenOption.APPEND);
 	}
 

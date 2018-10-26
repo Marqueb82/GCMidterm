@@ -173,6 +173,7 @@ public class LibraryApp {
 //		booklist.get(11);
 
 			boolean userResponse;
+			return genre;
 		}
 
 	}

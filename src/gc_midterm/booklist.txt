@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+The Good Earth	Pearl S. Buck	ONSHELF	10/25/2018	Parable	Fiction
+The Wasp Factory	Iain Banks	CHECKEDOUT	11/22/2018	Fiction
+The Alchemist	Paulo Coelho	CHECKEDOUT	12/11/2018	Teen	Fiction
+The New Jim Crow	Michelle Alexander	ONSHELF	10/28/2018	Non-Fiction	Criminal Justice
+1984	George Orwell	ONSHELF	10/20/2018	Fiction Science Fiction Classic
+Crime and Punishment	Fyodor Dostoyevsky	CHECKEDOUT	10/18/2018	Fiction	Classic
+Slaughterhouse-Five	Kurt Vonnegut	ONSHELF	10/22/2018	Fiction	Science Fiction
+=======
 The Good Earth///Pearl S. Buck///ONSHELF///10/25/2018///Parable, Fiction
 The Wasp Factory///Iain Banks///CHECKEDOUT///11/22/2018///Fiction
 The Alchemist///Paulo Coelho///CHECKEDOUT///12/11/2018///Teen, Fiction
@@ -6,3 +15,4 @@ The New Jim Crow///Michelle Alexander///ONSHELF///10/28/2018///Non-Fiction, Crim
 Crime and Punishment///Fyodor Dostoyevsky///CHECKEDOUT///10/18/2018///Fiction, Classic
 Slaughterhouse-Five///Kurt Vonnegut///ONSHELF///10/22/2018///Fiction, Science Fiction
 Test///Book///ONSHELF///11/15/2018///Science Fiction
+>>>>>>> d1fb61ab5e680d8be632e9de86c2c44df08fc8fa

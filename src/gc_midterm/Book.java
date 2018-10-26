@@ -1,5 +1,6 @@
 package gc_midterm;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Book {
@@ -63,9 +64,9 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [dueDate=" + dueDate + "]";
+		SimpleDateFormat sm = new SimpleDateFormat("MM-dd-yyyy");
+		return "Book [title=" + title + ", author=" + author + ", availability=" + availability + ", dueDate="
+				+ sm.format(dueDate) + ", genre=" + genre + "]";
 	}
-
-	// TODO toString
 
 }

@@ -3,10 +3,16 @@ package gc_midterm;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.sun.xml.internal.fastinfoset.algorithm.BooleanEncodingAlgorithm;
+
 public class LibraryApp {
+
+	BookTextFile btf = new BookTextFile();
+	Book book = new Book();
 
 	public static void main(String[] args) throws IOException, ParseException {
 		// TODO Auto-generated method stub
@@ -16,10 +22,6 @@ public class LibraryApp {
 		System.out.println("What can we do for you today?");
 
 		int userResponse;
-
-		//
-		BookTextFile btf = new BookTextFile();
-		Book book = new Book();
 
 		// will show book list
 		List<Book> ourBooks = btf.showBooks();
@@ -90,6 +92,23 @@ public class LibraryApp {
 		} while (userResponse != 7);
 
 		userInput.close();
+	}
+
+	public List<Book> keywordInBooklist() {
+		List<Book> keywordIncluded = new ArrayList<>();
+		boolean isValid = false;
+		do {
+			try {
+				keywordIncluded = btf.showBooks();
+				isValid = true;
+			} catch (IOException | ParseException e) {
+				// prints error and has user try again
+				e.printStackTrace();
+				isValid = false;
+			}
+		} while (!isValid);
+
+		return keywordIncluded;
 	}
 
 }

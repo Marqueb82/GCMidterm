@@ -3,23 +3,26 @@ package gc_midterm;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.sun.xml.internal.fastinfoset.algorithm.BooleanEncodingAlgorithm;
+
 public class LibraryApp {
+
+	BookTextFile btf = new BookTextFile();
+	Book book = new Book();
+	Scanner userInput = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException, ParseException {
 		// TODO Auto-generated method stub
-		Scanner userInput = new Scanner(System.in);
+		
 
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println("What can we do for you today?");
 
 		int userResponse;
-
-		//
-		BookTextFile btf = new BookTextFile();
-		Book book = new Book();
 
 		// will show book list
 		List<Book> ourBooks = btf.showBooks();
@@ -94,6 +97,42 @@ public class LibraryApp {
 		} while (userResponse != 7);
 
 		userInput.close();
+	}/*
+		 * if (Arrays.equals(array1, array2)) { System.out.println("EQUAL"); } else {
+		 * System.out.println("NOT EQUAL");
+		 */// layout we can use for bookavailability
+
+	}
+
+	public List<Book> keywordInBooklist() {
+		List<Book> completeList = new ArrayList<>();
+		List<Book> keywordIncluded = new ArrayList<>();
+
+		boolean isValid = false;
+		do {
+			try {
+				System.out.println("Please enter a keyword to search: ");
+				String userKeyword = userInput.nextLine();
+
+				// creates a list to cycle through
+				completeList = btf.showBooks();
+				// cycles through the list to add to a new list of just books with that key word
+				for (Book book : completeList) {
+					if (book.getAuthor().contains(userKeyword) || book.getTitle().contains(userKeyword)) {
+						keywordIncluded.add(book);
+					} else {
+						System.out.println("Sorry there are no books containing that keyword.");
+					}
+				}
+				isValid = true;
+			} catch (IOException | ParseException e) {
+				// prints error and has user try again
+				e.printStackTrace();
+				isValid = false;
+			}
+		} while (!isValid);
+
+		return keywordIncluded;
 	}
 
 }

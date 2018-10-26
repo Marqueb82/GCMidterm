@@ -61,7 +61,18 @@ public class LibraryApp {
 			System.out.println();
 			System.out.print("Please select the number that you would like explore: ");
 
+			List<Book> book2 = new ArrayList<>();
+			book2 = btf.showBooks();
+			List<Book> exBook = new ArrayList<>();
+			
+			exBook = Methods.searchBooks(book2, "Fiction", "jk rowling", "harry potter");
+			
+			System.out.println(exBook);
+			
+			
 			userResponse = userInput.nextInt();
+			
+			
 			switch (userResponse) {// the value being checked for
 			case 1:// trying a for loop out.
 					// for(int i = 0; i < bookList.Size(); i++){

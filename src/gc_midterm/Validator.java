@@ -47,7 +47,7 @@ public class Validator {
 	
 	/**
 	 * Get any string.
-	 */
+	 */ //BOOK
 	public static String getString(Scanner scnr, String prompt) {
 		// This approach uses exception handling.
 		System.out.print(prompt);

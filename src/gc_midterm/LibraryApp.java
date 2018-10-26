@@ -107,6 +107,7 @@ public class LibraryApp {
 		boolean isValid = false;
 		do {
 			try {
+				userInput.nextLine();
 				System.out.println("Please enter a keyword to search: ");
 				String userKeyword = userInput.nextLine();
 
@@ -134,16 +135,18 @@ public class LibraryApp {
 						}
 					}
 				}
+				// allows user to quit loop
 				isValid = true;
 			} catch (IOException | ParseException e) {
 				// prints error and has user try again
 				e.printStackTrace();
+				// allows user to repeat loop in order to enter valid input
 				isValid = false;
 			}
 		} while (!isValid);
 
 		for (Book book : keywordIncluded) {
-			System.out.println(String.format("Books: %-25s Author: %-25s", book.getTitle() + book.getAuthor()));
+			System.out.println(String.format("Books: %-25s Author: %50s", book.getTitle() + book.getAuthor()));
 		}
 	}
 

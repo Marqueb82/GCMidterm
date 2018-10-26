@@ -145,9 +145,43 @@ public class LibraryApp {
 			}
 		} while (!isValid);
 
+<<<<<<< HEAD
+		for (Book book : keywordIncluded)
+			System.out.println(Book.getTitle() + get);
+	
+	
+	}public List<Book> searchGenre ( List<Book> ourBooks) {
+		List<Book> booklist = new ArrayList<>();
+		booklist = btf.showBooks();
+		
+		// TODO create a menu with genre titles
+		for(int i = 0; i < booklist.size(); i++){
+		
+//		List of Books		
+//		booklist.get(0);
+//		booklist.get(1);
+//		booklist.get(2);
+//		booklist.get(3);
+//		booklist.get(4);
+//		booklist.get(5);
+//		booklist.get(6);
+//		booklist.get(7);
+//		booklist.get(8);
+//		booklist.get(9);
+//		booklist.get(10);
+//		booklist.get(11);
+		
+		
+		
+		boolean userResponse;
+		
+=======
 		for (Book book : keywordIncluded) {
 			System.out.println(String.format("Books: %-25s Author: %50s", book.getTitle() + book.getAuthor()));
 		}
+>>>>>>> 25bfe8db45f266ad860abccffa85efeca45076ba
 	}
+
+} 
 
 }

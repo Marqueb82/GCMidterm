@@ -32,7 +32,7 @@ public class BookTextFile {
 			List<String> lines = Files.readAllLines(filePath);
 			List<Book> books = new ArrayList<>();
 			for (String line : lines) {
-				String[] parts = line.split("\t");
+				String[] parts = line.split("///");
 				Book b = new Book();
 				b.setTitle(parts[0]);
 				b.setAuthor(parts[1]);
@@ -63,8 +63,8 @@ public class BookTextFile {
 		}
 
 		// Create a list with the user's book in it
-		String line = item.getTitle() + "\t" + item.getAuthor() + "\t" + item.getAvailability() + "\t"
-				+ item.getDueDate() + "\t" + item.getGenre();
+		String line = item.getTitle() + "///" + item.getAuthor() + "///" + item.getAvailability() + "///"
+				+ item.getDueDate() + "///" + item.getGenre();
 		List<String> linesToAdd = Arrays.asList(line);
 		Files.write(filePath, linesToAdd, StandardOpenOption.APPEND);
 	}

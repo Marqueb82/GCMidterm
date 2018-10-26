@@ -1,13 +1,14 @@
 package gc_midterm;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 public class LibraryApp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, ParseException {
 		// TODO Auto-generated method stub
 		Scanner userInput = new Scanner(System.in);
 
@@ -15,6 +16,35 @@ public class LibraryApp {
 		System.out.println("What can we do for you today?");
 
 		int userResponse;
+
+		//
+		BookTextFile btf = new BookTextFile();
+		Book book = new Book();
+
+		// will show book list
+		List<Book> ourBooks = btf.showBooks();
+		for (Book b : ourBooks) {
+			System.out.println(b.getTitle() + " " + b.getAuthor() + " " + b.getAvailability() + " " + b.getDueDate()
+					+ " " + b.getGenre());
+		}
+
+		System.out.println("\nEnter book title");
+		String title = userInput.nextLine();
+		System.out.println("\nEnter book author");
+		String author = userInput.nextLine();
+		System.out.println("\nEnter book status");
+		BookStatus available = BookStatus.valueOf(userInput.nextLine());
+		System.out.println("\nEnter book due date");
+		Date dueDate = userInput.nextLine();
+		System.out.println("\nEnter book genre");
+		String bookGenre = userInput.nextLine();
+
+		Book b = new Book(title, author, available, dueDate, bookGenre);
+
+		btf.appendToFile(b);
+
+		String name = "As a Man Thinketh";
+		btf.removeFromFile(name);
 
 		do {
 
@@ -56,19 +86,6 @@ public class LibraryApp {
 		} while (userResponse != 7);
 
 		userInput.close();
-	}
-
-	public static void booksInAlphabeticalOrder() throws IOException {
-		List<B> countries = CountriesTextFile.readFile(filePath);
-		TreeMap<String, Integer> countryInOrder = new TreeMap<>();
-
-		for (Country country : countries) {
-			String countryName = country.getCountryName();
-			int countryPopulation = country.getPopulation();
-			countryInOrder.put(countryName, countryPopulation);
-		}
-
-		System.out.println(countryInOrder);
 	}
 
 }

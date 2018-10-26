@@ -13,10 +13,6 @@ public class LibraryApp {
 	private static Scanner userInput = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException, ParseException {
-<<<<<<< HEAD
-		// TODO Auto-generated method stub
-=======
->>>>>>> 402879490dbd36ff32f29e4752153e27cbe09418
 
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println("How can we help you today?");

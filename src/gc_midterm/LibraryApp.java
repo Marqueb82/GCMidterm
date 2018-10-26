@@ -58,7 +58,8 @@ public class LibraryApp {
 			System.out.println(" 5. Select a book to checkout.");
 			System.out.println(" 6. Return a book.");
 			System.out.println(" 7. Exit Grand Chirpus Directory.");
-			System.out.println("\n Please select the number that you would like explore: ");
+			System.out.println();
+			System.out.print("Please select the number that you would like explore: ");
 
 			userResponse = userInput.nextInt();
 			switch (userResponse) {// the value being checked for
@@ -107,33 +108,41 @@ public class LibraryApp {
 		boolean isValid = false;
 		do {
 			try {
+				// creates a list to cycle through
+				completeList = btf.showBooks();
+
 				userInput.nextLine();
-				System.out.println("Please enter a keyword to search: ");
+				System.out.print("Please enter a keyword to search: ");
 				String userKeyword = userInput.nextLine();
 
 				// creates a list to cycle through
 				completeList = btf.showBooks();
 
 				// create an option to sort through authors or books with keyword
-				System.out.println("Would you like to search through authors or titles? ");
+				System.out.print("Would you like to search through authors or titles? ");
 				String userResponse = userInput.nextLine();
 
 				// cycles through the list to add to a new list of just books with that key word
 				for (Book book : completeList) {
 					// sorts either authors or titles
-					if (userResponse.toLowerCase().equals("authors")) {
-						if (book.getAuthor().contains(userKeyword)) {
+					if (userResponse.toLowerCase().contains("author")) {
+						if (book.getAuthor().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
-						} else {
-							System.out.println("Sorry, there are no authors containing that keyword.");
+							System.out.println(book.getTitle() + book.getAuthor());
 						}
+
 					} else if (userResponse.toLowerCase().contains("title")) {
-						if (book.getTitle().contains(userKeyword)) {
+						if (book.getTitle().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
-						} else {
-							System.out.println("Sorry, there are no authors containing that keyword.");
+							System.out.println(book.getTitle() + book.getAuthor());
 						}
+
 					}
+
+					if (keywordIncluded == null) {
+						System.out.println("Sorry, there are no authors containing that keyword.");
+					}
+
 				}
 				// allows user to quit loop
 				isValid = true;
@@ -144,19 +153,14 @@ public class LibraryApp {
 				isValid = false;
 			}
 		} while (!isValid);
-
-		for (Book book : keywordIncluded)
-			for (Book book : keywordIncluded) {
-				System.out.println(String.format("Books: %-25s Author: %50s", book.getTitle() + book.getAuthor()));
-			}
 	}
 
-	public List<Book> searchGenre(List<Book> ourBooks) {
-		List<Book> booklist = new ArrayList<>();
-		booklist = btf.showBooks();
-
-		// TODO create a menu with genre titles
-		for (int i = 0; i < booklist.size(); i++) {
+//	public List<Book> searchGenre(List<Book> ourBooks) {
+//		List<Book> booklist = new ArrayList<>();
+//		booklist = btf.showBooks();
+//
+//		// TODO create a menu with genre titles
+//		for (int i = 0; i < booklist.size(); i++) {
 
 //		List of Books		
 //		booklist.get(0);
@@ -172,10 +176,17 @@ public class LibraryApp {
 //		booklist.get(10);
 //		booklist.get(11);
 
+<<<<<<< HEAD
 			boolean userResponse;
 			return genre;
 		}
 
 	}
+=======
+//			boolean userResponse;
+//		}
+//
+//	}
+>>>>>>> 514bce0c8dbd305d924965e90c84bf7d3d24c888
 
 }

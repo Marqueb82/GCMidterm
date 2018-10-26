@@ -11,9 +11,9 @@ import com.sun.xml.internal.fastinfoset.algorithm.BooleanEncodingAlgorithm;
 
 public class LibraryApp {
 
-	BookTextFile btf = new BookTextFile();
-	Book book = new Book();
-	Scanner userInput = new Scanner(System.in);
+	private static BookTextFile btf = new BookTextFile();
+	private static Book book = new Book();
+	private static Scanner userInput = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException, ParseException {
 		// TODO Auto-generated method stub
@@ -100,7 +100,7 @@ public class LibraryApp {
 
 	}
 
-	public List<Book> keywordInBooklist() {
+	public static void keywordInBooklist() {
 		List<Book> completeList = new ArrayList<>();
 		List<Book> keywordIncluded = new ArrayList<>();
 
@@ -128,7 +128,8 @@ public class LibraryApp {
 			}
 		} while (!isValid);
 
-		return keywordIncluded;
+		for (Book book : keywordIncluded)
+			System.out.println(Book.getTitle() + get);
 	}
 
 }

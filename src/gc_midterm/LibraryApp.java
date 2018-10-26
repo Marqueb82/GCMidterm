@@ -28,10 +28,14 @@ public class LibraryApp {
 
 			userResponse = userInput.nextInt();
 			switch (userResponse) {// the value being checked for
-			case 1:
+			case 1://trying a for loop out.
+				for(int i = 0; i < bookList.Size(); i++){
+				    System.out.println(booklist.get(i).toString();
+				}
 				// TODO method for book list
 				break;
 			case 2:
+				
 				// TODO method for genres: Self-Help, Fiction, Non-Fiction
 				break;
 			case 3:

@@ -111,6 +111,7 @@ public class LibraryApp {
 		boolean isValid = false;
 		do {
 			try {
+				userInput.nextLine();
 				System.out.println("Please enter a keyword to search: ");
 				String userKeyword = userInput.nextLine();
 
@@ -138,26 +139,29 @@ public class LibraryApp {
 						}
 					}
 				}
+				// allows user to quit loop
 				isValid = true;
 			} catch (IOException | ParseException e) {
 				// prints error and has user try again
 				e.printStackTrace();
+				// allows user to repeat loop in order to enter valid input
 				isValid = false;
 			}
 		} while (!isValid);
 
-<<<<<<< HEAD
 		for (Book book : keywordIncluded)
-			System.out.println(Book.getTitle() + get);
-	
-	
-	}public List<Book> searchGenre ( List<Book> ourBooks) {
+			for (Book book : keywordIncluded) {
+				System.out.println(String.format("Books: %-25s Author: %50s", book.getTitle() + book.getAuthor()));
+			}
+	}
+
+	public List<Book> searchGenre(List<Book> ourBooks) {
 		List<Book> booklist = new ArrayList<>();
 		booklist = btf.showBooks();
-		
+
 		// TODO create a menu with genre titles
-		for(int i = 0; i < booklist.size(); i++){
-		
+		for (int i = 0; i < booklist.size(); i++) {
+
 //		List of Books		
 //		booklist.get(0);
 //		booklist.get(1);
@@ -171,18 +175,10 @@ public class LibraryApp {
 //		booklist.get(9);
 //		booklist.get(10);
 //		booklist.get(11);
-		
-		
-		
-		boolean userResponse;
-		
-=======
-		for (Book book : keywordIncluded) {
-			System.out.println(String.format("Books: %-25s Author: %-25s", book.getTitle() + book.getAuthor()));
-		}
->>>>>>> 25bfe8db45f266ad860abccffa85efeca45076ba
-	}
 
-} 
+			boolean userResponse;
+		}
+
+	}
 
 }

@@ -13,10 +13,11 @@ public class LibraryApp {
 
 	BookTextFile btf = new BookTextFile();
 	Book book = new Book();
+	Scanner userInput = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException, ParseException {
 		// TODO Auto-generated method stub
-		Scanner userInput = new Scanner(System.in);
+		
 
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println("What can we do for you today?");
@@ -100,15 +101,25 @@ public class LibraryApp {
 	}
 
 	public List<Book> keywordInBooklist() {
-		List<Book> books = new ArrayList<>();
+		List<Book> completeList = new ArrayList<>();
 		List<Book> keywordIncluded = new ArrayList<>();
 
 		boolean isValid = false;
 		do {
 			try {
+				System.out.println("Please enter a keyword to search: ");
+				String userKeyword = userInput.nextLine();
+
 				// creates a list to cycle through
-				books = btf.showBooks();
-				// cycles through the list to add to a new list of just books
+				completeList = btf.showBooks();
+				// cycles through the list to add to a new list of just books with that key word
+				for (Book book : completeList) {
+					if (book.getAuthor().contains(userKeyword) || book.getTitle().contains(userKeyword)) {
+						keywordIncluded.add(book);
+					} else {
+						System.out.println("Sorry there are no books containing that keyword.");
+					}
+				}
 				isValid = true;
 			} catch (IOException | ParseException e) {
 				// prints error and has user try again

@@ -58,7 +58,8 @@ public class LibraryApp {
 			System.out.println(" 5. Select a book to checkout.");
 			System.out.println(" 6. Return a book.");
 			System.out.println(" 7. Exit Grand Chirpus Directory.");
-			System.out.println("\n Please select the number that you would like explore: ");
+			System.out.println();
+			System.out.print("Please select the number that you would like explore: ");
 
 			userResponse = userInput.nextInt();
 			switch (userResponse) {// the value being checked for
@@ -111,37 +112,35 @@ public class LibraryApp {
 				completeList = btf.showBooks();
 
 				userInput.nextLine();
-				System.out.println("Please enter a keyword to search: ");
+				System.out.print("Please enter a keyword to search: ");
 				String userKeyword = userInput.nextLine();
 
 				// creates a list to cycle through
 				completeList = btf.showBooks();
 
 				// create an option to sort through authors or books with keyword
-				System.out.println("Would you like to search through authors or titles? ");
+				System.out.print("Would you like to search through authors or titles? ");
 				String userResponse = userInput.nextLine();
 
 				// cycles through the list to add to a new list of just books with that key word
 				for (Book book : completeList) {
 					// sorts either authors or titles
-					if (userResponse.toLowerCase().equals("authors")) {
-						if (book.getAuthor().contains(userKeyword)) {
+					if (userResponse.toLowerCase().contains("author")) {
+						if (book.getAuthor().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
+							System.out.println(book.getTitle() + book.getAuthor());
 						}
+
 					} else if (userResponse.toLowerCase().contains("title")) {
-						if (book.getTitle().contains(userKeyword)) {
+						if (book.getTitle().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
+							System.out.println(book.getTitle() + book.getAuthor());
 						}
+
 					}
 
 					if (keywordIncluded == null) {
 						System.out.println("Sorry, there are no authors containing that keyword.");
-					} else {
-						for (Book sortedBook : keywordIncluded) {
-							System.out.println(String.format("Books: %45s Author: %75s",
-									sortedBook.getTitle() + sortedBook.getAuthor()));
-						}
-
 					}
 
 				}

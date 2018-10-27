@@ -61,6 +61,7 @@ public class BookTextFile {
 		if (Files.notExists(filePath)) {
 			Files.createFile(filePath);
 		}
+		System.out.println(item.getDueDate());
 
 		// Create a list with the user's book in it
 		String line = item.getTitle() + "///" + item.getAuthor() + "///" + item.getAvailability() + "///"

@@ -65,8 +65,8 @@ public class Book {
 	@Override
 	public String toString() {
 		SimpleDateFormat sm = new SimpleDateFormat("MM-dd-yyyy");
-		return "Book [title=" + title + ", author=" + author + ", availability=" + availability + ", dueDate="
-				+ sm.format(dueDate) + ", genre=" + genre + "]";
+		return "Book [title = " + title + ", author = " + author + ", availability = " + availability + ", dueDate = "
+				+ sm.format(dueDate) + ", genre = " + genre + "]";
 	}
 
 }

@@ -1,7 +1,10 @@
-The Good Earth///Pearl S. Buck///ONSHELF///10/25/2018///Parable, Fiction
-The Wasp Factory///Iain Banks///CHECKEDOUT///11/22/2018///Fiction
-The Alchemist///Paulo Coelho///CHECKEDOUT///12/11/2018///Teen, Fiction
-The New Jim Crow///Michelle Alexander///ONSHELF///10/28/2018///Non-Fiction, Criminal Justice
-1984///George Orwell///ONSHELF///10/20/2018///Fiction, Science Fiction, Classic
-Crime and Punishment///Fyodor Dostoyevsky///CHECKEDOUT///10/18/2018///Fiction, Classic
-Slaughterhouse-Five///Kurt Vonnegut///ONSHELF///10/22/2018///Fiction, Science Fiction
+The Good Earth///Pearl S. Buck///ONSHELF///2018-08-08///Parable, Fiction
+The Wasp Factory///Iain Banks///CHECKEDOUT///2018-11-11///Fiction
+The Alchemist///Paulo Coelho///CHECKEDOUT///2018-12-11///Teen, Fiction
+The New Jim Crow///Michelle Alexander///ONSHELF///2018-10-28///Non-Fiction, Criminal Justice
+1984///George Orwell///ONSHELF///2018-10-20///Fiction, Science Fiction, Classic
+Crime and Punishment///Fyodor Dostoyevsky///CHECKEDOUT///2018-10-08///Fiction, Classic
+Slaughterhouse-Five///Kurt Vonnegut///ONSHELF///2018-10-20///Fiction, Science Fiction
+TestBook///Marque Burg///ONSHELF///2018-10-26///myOwn
+The BigTest///Twani GrandCircus///ONSHELF///2018-07-07///musical
+Mariah's Book///Mariah ofCourse///CHECKEDOUT///2018-10-26///java

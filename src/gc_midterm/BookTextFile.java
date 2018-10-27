@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +37,7 @@ public class BookTextFile {
 				b.setTitle(parts[0]);
 				b.setAuthor(parts[1]);
 				b.setAvailability(BookStatus.valueOf(parts[2]));
-				b.setDueDate(new SimpleDateFormat("MM/dd/yyyy").parse(parts[3]));
+				b.setDueDate(LocalDate.parse(parts[3]));
 				b.setGenre(parts[4]);
 				books.add(b);
 			}

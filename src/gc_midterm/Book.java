@@ -1,20 +1,19 @@
 package gc_midterm;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Book {
 
 	private String title;
 	private String author;
 	private BookStatus availability;
-	private Date dueDate;
+	private LocalDate dueDate;
 	private String genre;
 
 	public Book() {
 	}
 
-	public Book(String title, String author, BookStatus availability, Date dueDate, String genre) {
+	public Book(String title, String author, BookStatus availability, LocalDate dueDate, String genre) {
 		this.title = title;
 		this.author = author;
 		this.availability = availability;
@@ -46,11 +45,11 @@ public class Book {
 		this.availability = availability;
 	}
 
-	public Date getDueDate() {
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
 
@@ -64,9 +63,9 @@ public class Book {
 
 	@Override
 	public String toString() {
-		SimpleDateFormat sm = new SimpleDateFormat("MM-dd-yyyy");
+
 		return "Book [title = " + title + ", author = " + author + ", availability = " + availability + ", dueDate = "
-				+ sm.format(dueDate) + ", genre = " + genre + "]";
+				+ dueDate + ", genre = " + genre + "]";
 	}
 
 }

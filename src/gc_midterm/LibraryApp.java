@@ -86,6 +86,7 @@ public class LibraryApp {
 				break;
 			case 7:
 				System.out.println("Enjoy reading!");
+				updatedBooks(completeList);
 				System.exit(0);
 				break;
 			}
@@ -209,7 +210,7 @@ public class LibraryApp {
 					+ ourBook.getDueDate() + ".");
 		}
 		System.out.println(completeList.get(choice - 1).toString());
-		System.out.println(completeList);
+		// System.out.println(completeList);
 		return completeList;
 		// TODO method incomplete only returns changed object in text file
 //		btf.rewriteFile(ourBooks);
@@ -228,6 +229,16 @@ public class LibraryApp {
 		System.out.println(completeList.get(choice - 1).toString());
 		System.out.println(completeList);
 		return completeList;
+	}
+
+	public static void updatedBooks(List<Book> completeList) throws IOException {
+		List<Book> updatedBooks = new ArrayList<>();
+
+		for (Book b : completeList) {
+			updatedBooks.add(b);
+		}
+
+		btf.rewriteFile(updatedBooks);
 	}
 
 //	public List<Book> searchGenre(List<Book> ourBooks) {

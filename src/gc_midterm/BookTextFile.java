@@ -97,12 +97,7 @@ public class BookTextFile {
 		}
 
 		// ** Example of rewriting a whole file
-		List<String> newLines = new ArrayList<>();
-		for (Book item : items) {
-			String line = item.getTitle() + "///" + item.getAuthor() + "///" + item.getAvailability() + "///"
-					+ item.getDueDate() + "///" + item.getGenre();
-			newLines = Arrays.asList(line);
-		}
+		List<String> newLines = Arrays.asList(new String[] { items.toString() });
 		Files.write(filePath, newLines, StandardOpenOption.TRUNCATE_EXISTING);
 	}
 

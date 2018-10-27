@@ -61,7 +61,7 @@ public class LibraryApp {
 				searchBooks(completeList, userSearch);
 				break;
 			case 3:
-				// TODO Author
+				// calls method to search books by author
 				System.out.print("Enter author's name: ");
 				String authorName = userInput.nextLine();
 				System.out.println("Results--");
@@ -112,14 +112,38 @@ public class LibraryApp {
 	}
 
 	public static void genreList(List<Book> completeList) {
-		Set<String> differentGenres = new HashSet<>();
-		int i = 1;
+		// TODO create a validator in user input that user may only enter 5 genres if
+		// adding a book
+		String[] genresIncluded = new String[5];
+		String singleGenre = null;
+		Set<String> listOfGenres = new HashSet<>(); // hashset to get rid of duplicate genres (and to account for user
+													// entry genre that may not be included in original list)
+		int i = 1; // variable for number options on genre menu
 
+		// creates a string array for all possible genres (up to 5) for each instance of
+		// book
 		for (Book book : completeList) {
-			differentGenres.add(book.getGenre());
+			genresIncluded = book.getGenre().split(","); // allows for 5 possible genres per book
+
+			System.out.println("Book: " + book);
+			System.out.println("Single Genre: " + singleGenre);
+			System.out.println("Genres Included: " + genresIncluded.toString());
 		}
-		for (int j = 0; j < differentGenres.size(); j++) {
-			System.out.println(i + ". " + differentGenres.toString());
+
+		// sorts through the string array to add possible genres (unless they're null)
+		// to a hashset to account for duplicates
+		for (String genre : genresIncluded) {
+//			System.out.println("genre before if: " + genre);
+			if (genre != null) {
+				listOfGenres.add(genre);
+//				System.out.println("inside genre loop" + listOfGenres);
+			}
+		}
+//		System.out.println("Out of genre loop" + listOfGenres);
+
+		// prints out list itself
+		for (int j = 0; j < listOfGenres.size(); j++) {
+			System.out.println(i + ". " + listOfGenres.toString() + "\n");
 		}
 	}
 

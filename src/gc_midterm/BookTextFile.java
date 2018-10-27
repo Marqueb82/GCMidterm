@@ -91,14 +91,15 @@ public class BookTextFile {
 	 * @param items
 	 * @throws IOException
 	 */
-	public void rewriteFile(List<Book> items) throws IOException {
+	public void rewriteFile(List<Book> completeList) throws IOException {
 		if (Files.notExists(filePath)) {
 			Files.createFile(filePath);
 		}
 
 		// ** Example of rewriting a whole file
 		List<String> newLines = new ArrayList<>();
-		for (Book item : items) {
+
+		for (Book item : completeList) {
 			String line = item.getTitle() + "///" + item.getAuthor() + "///" + item.getAvailability() + "///"
 					+ item.getDueDate() + "///" + item.getGenre();
 			newLines = Arrays.asList(line);

@@ -248,7 +248,7 @@ public class LibraryApp {
 		}
 		// TODO: figure out a prettier format
 		System.out.println(completeList.get(choice - 1).toString());
-		System.out.println(completeList);
+		// System.out.println(completeList);
 		return completeList;
 	}
 
@@ -268,4 +268,39 @@ public class LibraryApp {
 		return completeList;
 	}
 
+	public static void updatedBooks(List<Book> completeList) throws IOException {
+		List<Book> updatedBooks = new ArrayList<>();
+
+		for (Book b : completeList) {
+			updatedBooks.add(b);
+		}
+
+		btf.rewriteFile(updatedBooks);
+	}
 }
+
+//	public List<Book> searchGenre(List<Book> ourBooks) {
+//		List<Book> booklist = new ArrayList<>();
+//		booklist = btf.showBooks();
+//
+//		// TODO create a menu with genre titles
+//		for (int i = 0; i < booklist.size(); i++) {
+
+//		List of Books		
+//		booklist.get(0);
+//		booklist.get(1);
+//		booklist.get(2);
+//		booklist.get(3);
+//		booklist.get(4);
+//		booklist.get(5);
+//		booklist.get(6);
+//		booklist.get(7);
+//		booklist.get(8);
+//		booklist.get(9);
+//		booklist.get(10);
+//		booklist.get(11);
+
+//			boolean userResponse;
+//		}
+//
+//	}

@@ -61,7 +61,6 @@ public class BookTextFile {
 		if (Files.notExists(filePath)) {
 			Files.createFile(filePath);
 		}
-		System.out.println(item.getDueDate());
 
 		// Create a list with the user's book in it
 		String line = item.getTitle() + "///" + item.getAuthor() + "///" + item.getAvailability() + "///"
@@ -85,6 +84,26 @@ public class BookTextFile {
 		List<String> leftovers = Files.lines(filePath).filter(line -> !line.contains(item))
 				.collect(Collectors.toList());
 		Files.write(filePath, leftovers, StandardOpenOption.TRUNCATE_EXISTING);
+	}
+
+	/**
+	 * 
+	 * @param items
+	 * @throws IOException
+	 */
+	public void rewriteFile(List<Book> items) throws IOException {
+		if (Files.notExists(filePath)) {
+			Files.createFile(filePath);
+		}
+
+		// ** Example of rewriting a whole file
+		List<String> newLines = new ArrayList<>();
+		for (Book item : items) {
+			String line = item.getTitle() + "///" + item.getAuthor() + "///" + item.getAvailability() + "///"
+					+ item.getDueDate() + "///" + item.getGenre();
+			newLines = Arrays.asList(line);
+		}
+		Files.write(filePath, newLines, StandardOpenOption.TRUNCATE_EXISTING);
 	}
 
 }

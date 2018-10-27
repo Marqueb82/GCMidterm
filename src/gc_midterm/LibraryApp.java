@@ -9,44 +9,15 @@ import java.util.Scanner;
 public class LibraryApp {
 
 	private static BookTextFile btf = new BookTextFile();
-	private static Book book = new Book();
 	private static Scanner userInput = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException, ParseException {
 
+		List<Book> ourBooks = btf.showBooks();
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println("How can we help you today?");
 
 		int userResponse;
-
-//		// will show book list
-//		List<Book> ourBooks = btf.showBooks();
-//		for (Book b : ourBooks) {
-//			System.out.println(b.getTitle() + " " + b.getAuthor() + " " + b.getAvailability() + " " + b.getDueDate()
-//					+ " " + b.getGenre());
-//		}
-
-		/*
-		 * Adding book testing from BookTextFile
-		 */
-//		System.out.println("\nEnter book title");
-//		String title = userInput.next();
-//		System.out.println("\nEnter book author");
-//		String author = userInput.nextLine();
-//		userInput.nextLine();
-//		System.out.println("\nEnter book status");
-//		BookStatus available = BookStatus.valueOf(userInput.next());
-//		System.out.println("\nEnter book due date");
-//		Date dueDate = Date.valueOf(userInput.next());
-//		System.out.println("\nEnter book genre");
-//		String bookGenre = userInput.next();
-
-//		Book b = new Book(title, author, available, dueDate, bookGenre);
-//
-//		btf.appendToFile(b);
-//
-//		String name = "As a Man Thinketh";
-//		btf.removeFromFile(name);
 
 		do {
 
@@ -59,33 +30,32 @@ public class LibraryApp {
 			System.out.println(" 6. Return a book.");
 			System.out.println(" 7. Exit Grand Chirpus Directory.");
 			System.out.println();
-			System.out.print("Please select the number that you would like explore: ");
 
-			List<Book> book2 = new ArrayList<>();
-			book2 = btf.showBooks();
-			List<Book> exBook = new ArrayList<>();
-			
-			exBook = Methods.searchBooks(book2, "Fiction", "jk rowling", "harry potter");
-			
-			System.out.println(exBook);
-			
-			
+			System.out.print("Please select the number that you would like explore: ");
 			userResponse = userInput.nextInt();
-			
-			
+			userInput.nextLine();
+
 			switch (userResponse) {// the value being checked for
-			case 1:// trying a for loop out.
-					// for(int i = 0; i < bookList.Size(); i++){
-					// System.out.println(booklist.get(i).toString();
-					// }
-					// TODO method for book list
+			case 1:
+				// method to list books
+				System.out.println("Here is a list of our books--");
+				System.out.println("==============================");
+				printOutBooks(ourBooks);
 				break;
 			case 2:
-
 				// TODO method for genres: Self-Help, Fiction, Non-Fiction
+				// may need to check how we specify txt genre--may need one genre
+				System.out.println("What would you like to search by: ");
+				String userSearch = userInput.nextLine();
+				System.out.println("Results--");
+				searchBooks(ourBooks, userSearch);
 				break;
 			case 3:
 				// TODO Author
+				System.out.println("Enter author's name: ");
+				String authorName = userInput.nextLine();
+				System.out.println("Results--");
+				searchByAuthor(ourBooks, authorName);
 				break;
 			case 4:
 				// calls method to find keywords
@@ -93,7 +63,10 @@ public class LibraryApp {
 				break;
 			case 5:
 				// calls method to check out book
-				checkOutBook();
+				printOutBooks(ourBooks);
+				System.out.println("Which book");
+				int choice = userInput.nextInt();
+				checkOutBook(ourBooks, choice);
 				break;
 			case 6:
 				// TODO return a book
@@ -112,14 +85,11 @@ public class LibraryApp {
 		 * System.out.println("NOT EQUAL");
 		 */// layout we can use for book availability
 
-	public static void checkOutBook() throws IOException, ParseException {
-		List<Book> completeList = new ArrayList<>();
-		completeList = btf.showBooks();
-		int i = 0;
+	public static void printOutBooks(List<Book> completeList) throws IOException, ParseException {
+		int i = 1;
 
-		System.out.println("Please select a book to check: ");
 		for (Book book : completeList) {
-			System.out.println((i + 1) + ". " + book.getTitle() + " by " + book.getAuthor());
+			System.out.println((i++) + ". " + book.getTitle() + " by " + book.getAuthor());
 		}
 
 	}
@@ -175,6 +145,45 @@ public class LibraryApp {
 				isValid = false;
 			}
 		} while (!isValid);
+	}
+
+	public static void searchBooks(List<Book> ourBooks, String search) {
+		List<Book> searchedBookList = new ArrayList<>();
+
+		for (Book b : ourBooks) {
+			if (b.getGenre().equals(search) || b.getAuthor().equals(search) || b.getTitle().equals(search)) {
+				searchedBookList.add(b);
+			}
+		}
+
+		int i = 1;
+		for (Book book : searchedBookList) {
+			System.out.println((i++) + ". " + book.getTitle() + " by " + book.getAuthor());
+		}
+
+	}
+
+	public static void searchByAuthor(List<Book> ourBooks, String search) {
+		List<Book> searchedBookList = new ArrayList<>();
+
+		for (Book b : ourBooks) {
+			if (b.getAuthor().equals(search)) {
+				searchedBookList.add(b);
+			}
+		}
+
+		int i = 1;
+		for (Book book : searchedBookList) {
+			System.out.println((i++) + ". " + book.getTitle() + " by " + book.getAuthor());
+		}
+
+	}
+
+	public static void checkOutBook(List<Book> ourBooks, int choice) throws IOException, ParseException {
+		ourBooks.get(choice - 1).setAvailability(BookStatus.CHECKEDOUT);
+		System.out.println(ourBooks.get(choice - 1).toString());
+		// method incomplete only returns changed object in text file
+		btf.rewriteFile(ourBooks);
 	}
 
 //	public List<Book> searchGenre(List<Book> ourBooks) {

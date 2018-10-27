@@ -6,8 +6,10 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class LibraryApp {
 
@@ -52,7 +54,8 @@ public class LibraryApp {
 				// may need to check how we specify txt genre--may need one genre
 				// TODO was thinking that we could use the split method using ", " to make a set
 				// that gets rid of duplicates of the genres? -MH
-				System.out.println("What would you like to search by: ");
+				System.out.println("What genre would you like to search by: ");
+				genreList(completeList);
 				String userSearch = userInput.nextLine();
 				System.out.println("Results--");
 				searchBooks(completeList, userSearch);
@@ -66,7 +69,7 @@ public class LibraryApp {
 				break;
 			case 4:
 				// calls method to find keywords
-				keywordInBooklist();
+				keywordInBooklist(completeList);
 				break;
 			case 5:
 				// TODO possibly just make a list of books that are currently onshelf??
@@ -85,7 +88,8 @@ public class LibraryApp {
 				completeList = returnBook(completeList, choice);
 				break;
 			case 7:
-				System.out.println("Enjoy reading!");
+				System.out.println("Enjoy reading! We hope to see you soon.");
+				btf.rewriteFile(completeList);
 				System.exit(0);
 				break;
 			}
@@ -107,15 +111,24 @@ public class LibraryApp {
 
 	}
 
-	public static void keywordInBooklist() {
-		List<Book> completeList = new ArrayList<>();
+	public static void genreList(List<Book> completeList) {
+		Set<String> differentGenres = new HashSet<>();
+		int i = 1;
+
+		for (Book book : completeList) {
+			differentGenres.add(book.getGenre());
+		}
+		for (int j = 0; j < differentGenres.size(); j++) {
+			System.out.println(i + ". " + differentGenres.toString());
+		}
+	}
+
+	public static void keywordInBooklist(List<Book> completeList) {
 		List<Book> keywordIncluded = new ArrayList<>();
 
 		boolean isValid = false;
 		do {
 			try {
-				// creates a list to cycle through
-				completeList = btf.showBooks();
 
 				userInput.nextLine();
 				System.out.print("Please enter a keyword to search: ");
@@ -144,6 +157,7 @@ public class LibraryApp {
 						}
 					}
 
+					// if no books were added to the list, it lets the user know
 					if (keywordIncluded == null) {
 						System.out.println("Sorry, we don't have any inventory containing that keyword.");
 					}
@@ -208,11 +222,10 @@ public class LibraryApp {
 			System.out.println("Sorry, that book has already been checked out. It is due back to the library "
 					+ ourBook.getDueDate() + ".");
 		}
+		// TODO: figure out a prettier format
 		System.out.println(completeList.get(choice - 1).toString());
 		System.out.println(completeList);
 		return completeList;
-		// TODO method incomplete only returns changed object in text file
-//		btf.rewriteFile(ourBooks);
 	}
 
 	public static List<Book> returnBook(List<Book> completeList, int choice) throws IOException, ParseException {
@@ -225,35 +238,10 @@ public class LibraryApp {
 		} else if (completeList.get(choice - 1).getAvailability().equals(BookStatus.ONSHELF)) {
 			System.out.println("That book is already available!");
 		}
+		// TODO figure out a prettier format
 		System.out.println(completeList.get(choice - 1).toString());
 		System.out.println(completeList);
 		return completeList;
 	}
-
-//	public List<Book> searchGenre(List<Book> ourBooks) {
-//		List<Book> booklist = new ArrayList<>();
-//		booklist = btf.showBooks();
-//
-//		// TODO create a menu with genre titles
-//		for (int i = 0; i < booklist.size(); i++) {
-
-//		List of Books		
-//		booklist.get(0);
-//		booklist.get(1);
-//		booklist.get(2);
-//		booklist.get(3);
-//		booklist.get(4);
-//		booklist.get(5);
-//		booklist.get(6);
-//		booklist.get(7);
-//		booklist.get(8);
-//		booklist.get(9);
-//		booklist.get(10);
-//		booklist.get(11);
-
-//			boolean userResponse;
-//		}
-//
-//	}
 
 }

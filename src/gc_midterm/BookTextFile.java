@@ -97,10 +97,6 @@ public class BookTextFile {
 		}
 
 		// ** Example of rewriting a whole file
-<<<<<<< HEAD
-
-=======
->>>>>>> acc1e157dacf44e099529feb26895c7e28c97ff7
 		List<String> newLines = new ArrayList<>();
 
 		for (Book item : completeList) {
@@ -108,13 +104,8 @@ public class BookTextFile {
 					+ item.getDueDate() + "///" + item.getGenre();
 			newLines = Arrays.asList(line);
 		}
-<<<<<<< HEAD
 
-		List<String> newLines = Arrays.asList(new String[] { items.toString() });
-
-=======
-		List<String> newLines = Arrays.asList(new String[] { items.toString() });
->>>>>>> acc1e157dacf44e099529feb26895c7e28c97ff7
+		newLines = Arrays.asList(new String[] { completeList.toString() });
 		Files.write(filePath, newLines, StandardOpenOption.TRUNCATE_EXISTING);
 	}
 

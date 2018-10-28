@@ -96,10 +96,11 @@ public class LibraryApp {
 
 		System.out.println("Grand Chirpus Inventory: ");
 		System.out.println("==============================");
+		System.out.println(String.format("    %-25s %-20s", "Title", "Author"));
 
 		int i = 1;
 		for (Book book : completeList) {
-			System.out.println((i++) + ". " + book.getTitle() + " by " + book.getAuthor());
+			System.out.println(String.format("%2d. %-25s %-20s", (i++), book.getTitle(), book.getAuthor()));
 		}
 	}
 

@@ -56,9 +56,9 @@ public class LibraryApp {
 				// that gets rid of duplicates of the genres? -MH
 				System.out.println("What genre would you like to search by: ");
 				genreList(completeList);
-				String userSearch = userInput.nextLine();
-				System.out.println("Results--");
-				searchBooks(completeList, userSearch);
+				// String userSearch = userInput.nextLine();
+				// System.out.println("Results--");
+				// searchBooks(completeList, userSearch);
 				break;
 			case 3:
 				// calls method to search books by author
@@ -75,7 +75,7 @@ public class LibraryApp {
 				// TODO possibly just make a list of books that are currently onshelf??
 				// calls method to check out book
 				printOutBooks(completeList);
-				System.out.print("Which book would you like to check out? ");
+				System.out.print("\nWhich book would you like to check out? ");
 				int choice = userInput.nextInt();
 				completeList = checkOutBook(completeList, choice);
 				break;
@@ -83,7 +83,7 @@ public class LibraryApp {
 				// TODO possibly just make a list of books that are currently check out??
 				// allows user to return a book
 				printOutBooks(completeList);
-				System.out.print("Which book would you like to return? ");
+				System.out.print("\nWhich book would you like to return? ");
 				choice = userInput.nextInt();
 				completeList = returnBook(completeList, choice);
 				break;
@@ -153,8 +153,6 @@ public class LibraryApp {
 		boolean isValid = false;
 		do {
 			try {
-
-				userInput.nextLine();
 				System.out.print("Please enter a keyword to search: ");
 				String userKeyword = userInput.nextLine();
 
@@ -164,28 +162,25 @@ public class LibraryApp {
 				// create an option to sort through authors or books with keyword
 				System.out.print("Would you like to search through authors or titles? ");
 				String userResponse = userInput.nextLine();
-
+				userInput.nextLine();
 				// cycles through the list to add to a new list of just books with that key word
 				for (Book book : completeList) {
 					// sorts either authors or titles
 					if (userResponse.toLowerCase().contains("author")) {
 						if (book.getAuthor().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
-							System.out.println(book.getTitle() + book.getAuthor());
+							System.out.println(book.getTitle() + " " + book.getAuthor());
 						}
-
 					} else if (userResponse.toLowerCase().contains("title")) {
 						if (book.getTitle().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
-							System.out.println(book.getTitle() + book.getAuthor());
+							System.out.println(book.getTitle() + " " + book.getAuthor());
 						}
 					}
-
 					// if no books were added to the list, it lets the user know
 					if (keywordIncluded == null) {
 						System.out.println("Sorry, we don't have any inventory containing that keyword.");
 					}
-
 				}
 				// allows user to quit loop
 				isValid = true;
@@ -198,36 +193,10 @@ public class LibraryApp {
 		} while (!isValid);
 	}
 
-	public static void searchBooks(List<Book> completeList, String search) {
-		List<Book> searchedBookList = new ArrayList<>();
+	public static void searchByAuthor(List<Book> completeList, String authorName) {
 
-		for (Book sortBook : completeList) {
-			if (sortBook.getGenre().equals(search) || sortBook.getAuthor().equals(search)
-					|| sortBook.getTitle().equals(search)) {
-				searchedBookList.add(sortBook);
-			}
-		}
-
-		int i = 1;
-		for (Book book : searchedBookList) {
-			System.out.println((i++) + ". " + book.getTitle() + " by " + book.getAuthor());
-		}
-
-	}
-
-	public static void searchByAuthor(List<Book> completeList, String search) {
-		List<Book> searchedBookList = new ArrayList<>();
-
-		for (Book sortBook : completeList) {
-			if (sortBook.getAuthor().equals(search)) {
-				searchedBookList.add(sortBook);
-			}
-		}
-
-		int i = 1;
-		for (Book book : searchedBookList) {
-			System.out.println((i++) + ". " + book.getTitle() + " by " + book.getAuthor());
-		}
+		completeList.stream().filter(b -> b.getAuthor().equals(authorName))
+				.forEach(b -> System.out.println(b.toString()));
 
 	}
 
@@ -242,13 +211,12 @@ public class LibraryApp {
 			LocalDate today = LocalDate.now();
 			LocalDate dueDate = today.plus(14, ChronoUnit.DAYS);
 			ourBook.setDueDate(dueDate);
+			System.out.println("\nYour checking out " + completeList.get(choice - 1).toString());
 		} else if (completeList.get(choice - 1).getAvailability().equals(BookStatus.CHECKEDOUT)) {
 			System.out.println("Sorry, that book has already been checked out. It is due back to the library "
 					+ ourBook.getDueDate() + ".");
 		}
-		// TODO: figure out a prettier format
-		System.out.println(completeList.get(choice - 1).toString());
-		// System.out.println(completeList);
+
 		return completeList;
 	}
 
@@ -259,12 +227,10 @@ public class LibraryApp {
 		if (ourBook.getAvailability().equals(BookStatus.CHECKEDOUT)) {
 			ourBook.setAvailability(BookStatus.ONSHELF);
 			ourBook.setDueDate(PRINCE);
+			System.out.println("Thank you for your return.");
 		} else if (completeList.get(choice - 1).getAvailability().equals(BookStatus.ONSHELF)) {
 			System.out.println("That book is already available!");
 		}
-		// TODO figure out a prettier format
-		System.out.println(completeList.get(choice - 1).toString());
-		System.out.println(completeList);
 		return completeList;
 	}
 
@@ -278,29 +244,3 @@ public class LibraryApp {
 		btf.rewriteFile(updatedBooks);
 	}
 }
-
-//	public List<Book> searchGenre(List<Book> ourBooks) {
-//		List<Book> booklist = new ArrayList<>();
-//		booklist = btf.showBooks();
-//
-//		// TODO create a menu with genre titles
-//		for (int i = 0; i < booklist.size(); i++) {
-
-//		List of Books		
-//		booklist.get(0);
-//		booklist.get(1);
-//		booklist.get(2);
-//		booklist.get(3);
-//		booklist.get(4);
-//		booklist.get(5);
-//		booklist.get(6);
-//		booklist.get(7);
-//		booklist.get(8);
-//		booklist.get(9);
-//		booklist.get(10);
-//		booklist.get(11);
-
-//			boolean userResponse;
-//		}
-//
-//	}

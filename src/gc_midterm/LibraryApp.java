@@ -111,7 +111,6 @@ public class LibraryApp {
 					userContinue = userContinueLoop(
 							"Would you like to return another book? (Please enter yes to continue and any other key to go back to the main menu) : ");
 				} while (userContinue);
-
 				break;
 
 			case 7:
@@ -166,6 +165,7 @@ public class LibraryApp {
 		// prints out list itself
 		for (String genre : listOfGenres) {
 			System.out.println(i + ". " + genre);
+			i++;
 		}
 	}
 
@@ -175,8 +175,6 @@ public class LibraryApp {
 		boolean isValid = false;
 		do {
 			try {
-
-				userInput.nextLine();
 				System.out.print("Please enter a keyword to search: ");
 				String userKeyword = userInput.nextLine();
 
@@ -186,28 +184,25 @@ public class LibraryApp {
 				// create an option to sort through authors or books with keyword
 				System.out.print("Would you like to search through authors or titles? ");
 				String userResponse = userInput.nextLine();
-
+				userInput.nextLine();
 				// cycles through the list to add to a new list of just books with that key word
 				for (Book book : completeList) {
 					// sorts either authors or titles
 					if (userResponse.toLowerCase().contains("author")) {
 						if (book.getAuthor().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
-							System.out.println(book.getTitle() + book.getAuthor());
+							System.out.println(book.getTitle() + " " + book.getAuthor());
 						}
-
 					} else if (userResponse.toLowerCase().contains("title")) {
 						if (book.getTitle().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
-							System.out.println(book.getTitle() + book.getAuthor());
+							System.out.println(book.getTitle() + " " + book.getAuthor());
 						}
 					}
-
 					// if no books were added to the list, it lets the user know
 					if (keywordIncluded == null) {
 						System.out.println("Sorry, we don't have any inventory containing that keyword.");
 					}
-
 				}
 				// allows user to quit loop
 				isValid = true;
@@ -239,6 +234,13 @@ public class LibraryApp {
 
 	}
 
+	public static void searchByAuthor(List<Book> completeList, String authorName) {
+
+		completeList.stream().filter(b -> b.getAuthor().equals(authorName))
+				.forEach(b -> System.out.println(b.toString()));
+
+	}
+
 	public static List<Book> checkOutBook(List<Book> completeList, int choice) throws IOException, ParseException {
 		// sorts through list of all books to find the book requested by user and sets a
 		// due date if book is on shelf, if book is already checked out, it lets the
@@ -250,13 +252,12 @@ public class LibraryApp {
 			LocalDate today = LocalDate.now();
 			LocalDate dueDate = today.plus(14, ChronoUnit.DAYS);
 			ourBook.setDueDate(dueDate);
+			System.out.println("\nYour checking out " + completeList.get(choice - 1).toString());
 		} else if (completeList.get(choice - 1).getAvailability().equals(BookStatus.CHECKEDOUT)) {
 			System.out.println("Sorry, that book has already been checked out. It is due back to the library "
 					+ ourBook.getDueDate() + ".");
 		}
-		// TODO: figure out a prettier format
-		System.out.println(completeList.get(choice - 1).toString());
-		// System.out.println(completeList);
+
 		return completeList;
 	}
 
@@ -267,12 +268,10 @@ public class LibraryApp {
 		if (ourBook.getAvailability().equals(BookStatus.CHECKEDOUT)) {
 			ourBook.setAvailability(BookStatus.ONSHELF);
 			ourBook.setDueDate(PRINCE);
+			System.out.println("Thank you for your return.");
 		} else if (completeList.get(choice - 1).getAvailability().equals(BookStatus.ONSHELF)) {
 			System.out.println("That book is already available!");
 		}
-		// TODO figure out a prettier format
-		System.out.println(completeList.get(choice - 1).toString());
-		System.out.println(completeList);
 		return completeList;
 	}
 

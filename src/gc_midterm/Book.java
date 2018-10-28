@@ -64,8 +64,8 @@ public class Book {
 	@Override
 	public String toString() {
 
-		return "Book [title = " + title + ", author = " + author + ", availability = " + availability + ", dueDate = "
-				+ dueDate + ", genre = " + genre + "]";
+		return "Title: " + title + " Author: " + author + " Book Status (Checked out or available): " + availability
+				+ " Due Back: " + dueDate + " Genre(s): " + genre;
 	}
 
 }

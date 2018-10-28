@@ -63,8 +63,9 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return title + " by " + author + " is " + availability + ", due back on " + dueDate + ", genre type -- "
-				+ genre;
+
+		return "Title: " + title + " Author: " + author + " Book Status (Checked out or available): " + availability
+				+ " Due Back: " + dueDate + " Genre(s): " + genre;
 	}
 
 }

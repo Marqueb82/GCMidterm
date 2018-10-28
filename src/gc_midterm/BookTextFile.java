@@ -103,10 +103,8 @@ public class BookTextFile {
 					+ "///" + b.getGenre();
 			newLines.add(line);
 		}
-		// List<String> linesToAdd = Arrays.asList(line);
-		// List<String> newLines = Arrays.asList(line);
-		Files.write(filePath, newLines, StandardOpenOption.TRUNCATE_EXISTING);
 
+		Files.write(filePath, newLines, StandardOpenOption.TRUNCATE_EXISTING);
 	}
 
 }

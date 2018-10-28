@@ -16,6 +16,7 @@ public class LibraryApp {
 	private static BookTextFile btf = new BookTextFile();
 	private static Scanner userInput = new Scanner(System.in);
 	private static final LocalDate PRINCE = LocalDate.of(1999, Month.JANUARY, 1);
+	private static boolean userContinue = false;
 
 	public static void main(String[] args) throws IOException, ParseException {
 
@@ -45,48 +46,74 @@ public class LibraryApp {
 			switch (userResponse) {// the value being checked for
 			case 1:
 				// method to list books
-				System.out.println("Here is a list of our books--");
+				System.out.print("Grand Chirpus Inventory: ");
 				System.out.println("==============================");
 				printOutBooks(completeList);
+				System.out.println();
 				break;
+
 			case 2:
-				// TODO method for genres: Self-Help, Fiction, Non-Fiction
-				// may need to check how we specify txt genre--may need one genre
-				// TODO was thinking that we could use the split method using ", " to make a set
-				// that gets rid of duplicates of the genres? -MH
-				System.out.println("What genre would you like to search by: ");
-				genreList(completeList);
-				// String userSearch = userInput.nextLine();
-				// System.out.println("Results--");
-				// searchBooks(completeList, userSearch);
+				do {
+					// method for searching books by genre
+					System.out.println("What genre would you like to search by: ");
+					genreList(completeList);
+					String userSearch = userInput.nextLine();
+					// TODO
+					System.out.print("Books in " /* + genreVariable */ + ": ");
+					searchBooks(completeList, userSearch);
+
+					userContinue = userContinueLoop(
+							"Would you like to search by another genre? (Please enter yes to continue and any other key to go back to the main menu) : ");
+				} while (userContinue);
 				break;
+
 			case 3:
-				// calls method to search books by author
-				System.out.print("Enter author's name: ");
-				String authorName = userInput.nextLine();
-				System.out.println("Results--");
-				searchByAuthor(completeList, authorName);
+				do {
+					// calls method to search books by author
+					System.out.print("Enter author's name: ");
+					String authorName = userInput.nextLine();
+					System.out.println("Books by " + authorName + ": ");
+					searchByAuthor(completeList, authorName);
+
+					userContinue = userContinueLoop(
+							"Would you like to search by a different author? (Please enter yes to continue and any other key to go back to the main menu) : ");
+				} while (userContinue);
 				break;
+
 			case 4:
 				// calls method to find keywords
 				keywordInBooklist(completeList);
 				break;
+
 			case 5:
-				// TODO possibly just make a list of books that are currently onshelf??
-				// calls method to check out book
-				printOutBooks(completeList);
-				System.out.print("\nWhich book would you like to check out? ");
-				int choice = userInput.nextInt();
-				completeList = checkOutBook(completeList, choice);
+				do {
+					// TODO possibly just make a list of books that are currently onshelf??
+					// calls method to check out book
+					printOutBooks(completeList);
+					System.out.print("Which book would you like to check out? ");
+					int choice = userInput.nextInt();
+					completeList = checkOutBook(completeList, choice);
+
+					userContinue = userContinueLoop(
+							"Would you like to check out another book? (Please enter yes to continue and any other key to go back to the main menu) : ");
+				} while (userContinue);
 				break;
+
 			case 6:
 				// TODO possibly just make a list of books that are currently check out??
 				// allows user to return a book
-				printOutBooks(completeList);
-				System.out.print("\nWhich book would you like to return? ");
-				choice = userInput.nextInt();
-				completeList = returnBook(completeList, choice);
+				do {
+					printOutBooks(completeList);
+					System.out.print("Which book would you like to return? ");
+					int choice = userInput.nextInt();
+					completeList = returnBook(completeList, choice);
+
+					// calls method to check if user would like to return another book
+					userContinue = userContinueLoop(
+							"Would you like to return another book? (Please enter yes to continue and any other key to go back to the main menu) : ");
+				} while (userContinue);
 				break;
+
 			case 7:
 				System.out.println("Enjoy reading! We hope to see you soon.");
 				btf.rewriteFile(completeList);
@@ -123,27 +150,22 @@ public class LibraryApp {
 		// creates a string array for all possible genres (up to 5) for each instance of
 		// book
 		for (Book book : completeList) {
-			genresIncluded = book.getGenre().split(","); // allows for 5 possible genres per book
+			singleGenre = book.getGenre();
+			genresIncluded = singleGenre.split(","); // allows for 5 possible genres per book
 
-			System.out.println("Book: " + book);
-			System.out.println("Single Genre: " + singleGenre);
-			System.out.println("Genres Included: " + genresIncluded.toString());
-		}
-
-		// sorts through the string array to add possible genres (unless they're null)
-		// to a hashset to account for duplicates
-		for (String genre : genresIncluded) {
-//			System.out.println("genre before if: " + genre);
-			if (genre != null) {
-				listOfGenres.add(genre);
-//				System.out.println("inside genre loop" + listOfGenres);
+			// sorts through the string array to add possible genres (unless they're null)
+			// to a hashset to account for duplicates
+			for (String genre : genresIncluded) {
+				if (genre != null) {
+					listOfGenres.add(genre);
+				}
 			}
 		}
-//		System.out.println("Out of genre loop" + listOfGenres);
 
 		// prints out list itself
-		for (int j = 0; j < listOfGenres.size(); j++) {
-			System.out.println(i + ". " + listOfGenres.toString() + "\n");
+		for (String genre : listOfGenres) {
+			System.out.println(i + ". " + genre);
+			i++;
 		}
 	}
 
@@ -193,6 +215,25 @@ public class LibraryApp {
 		} while (!isValid);
 	}
 
+	public static void searchBooks(List<Book> completeList, String search) {
+		List<Book> searchedBookList = new ArrayList<>();
+		// TODO do we want to keep getAuthor and getTitle as equals or change them to
+		// "contains"
+
+		for (Book sortBook : completeList) {
+			if (sortBook.getGenre().equals(search) || sortBook.getAuthor().equals(search)
+					|| sortBook.getTitle().equals(search)) {
+				searchedBookList.add(sortBook);
+			}
+		}
+
+		int i = 1;
+		for (Book book : searchedBookList) {
+			System.out.println((i++) + ". " + book.getTitle() + " by " + book.getAuthor());
+		}
+
+	}
+
 	public static void searchByAuthor(List<Book> completeList, String authorName) {
 
 		completeList.stream().filter(b -> b.getAuthor().equals(authorName))
@@ -234,6 +275,19 @@ public class LibraryApp {
 		return completeList;
 	}
 
+	public static boolean userContinueLoop(String prompt) {
+		System.out.print(prompt);
+		String userReturn = userInput.nextLine();
+
+		if (userReturn.toLowerCase().equals("y")) {
+			userContinue = true;
+		} else {
+			userContinue = false;
+		}
+		return userContinue;
+	}
+
+	// method to update book i/o file when user quits the program
 	public static void updatedBooks(List<Book> completeList) throws IOException {
 		List<Book> updatedBooks = new ArrayList<>();
 

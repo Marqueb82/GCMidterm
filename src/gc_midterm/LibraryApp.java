@@ -16,10 +16,8 @@ public class LibraryApp {
 	private static BookTextFile btf = new BookTextFile();
 	private static Scanner userInput = new Scanner(System.in);
 	private static final LocalDate PRINCE = LocalDate.of(1999, Month.JANUARY, 1);
-	private static boolean userContinue = false;
 
 	public static void main(String[] args) throws IOException, ParseException {
-
 		List<Book> completeList = btf.showBooks();
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println("How can we help you today?");
@@ -46,81 +44,46 @@ public class LibraryApp {
 			switch (userResponse) {// the value being checked for
 			case 1:
 				// method to list books
-				System.out.print("Grand Chirpus Inventory: ");
-				System.out.println("==============================");
 				printOutBooks(completeList);
-				System.out.println();
 				break;
+			case 2: // **check method**
+				// **returns same genre type multiple times
+				// **will not show books after seletiong genre
 
-			case 2:
-				do {
-					// method for searching books by genre
-					System.out.println("What genre would you like to search by: ");
-					genreList(completeList);
-					String userSearch = userInput.nextLine();
-					// TODO
-					System.out.print("Books in " /* + genreVariable */ + ": ");
-					searchBooks(completeList, userSearch);
+				// method for searching books by genre
+				System.out.println("What genre would you like to search by: ");
+				genreList(completeList);
+				String userSearch = userInput.nextLine();
+				// TODO
+				System.out.print("Books in " /* + genreVariable */ + ": ");
+				searchBooks(completeList, userSearch);
 
-					userContinue = userContinueLoop(
-							"Would you like to search by another genre? (Please enter yes to continue and any other key to go back to the main menu) : ");
-				} while (userContinue);
 				break;
 
 			case 3:
-				do {
-					// calls method to search books by author
-					System.out.print("Enter author's name: ");
-					String authorName = userInput.nextLine();
-					System.out.println("Books by " + authorName + ": ");
-					searchByAuthor(completeList, authorName);
-
-					userContinue = userContinueLoop(
-							"Would you like to search by a different author? (Please enter yes to continue and any other key to go back to the main menu) : ");
-				} while (userContinue);
+				// calls method to search books by author
+				searchByAuthor(completeList, userInput);
 				break;
-
-			case 4:
-				// calls method to find keywords
+			case 4:// **discuss user case input to get result
+					// calls method to find keywords
 				keywordInBooklist(completeList);
 				break;
-
 			case 5:
-				do {
-					// TODO possibly just make a list of books that are currently onshelf??
-					// calls method to check out book
-					printOutBooks(completeList);
-					System.out.print("Which book would you like to check out? ");
-					int choice = userInput.nextInt();
-					completeList = checkOutBook(completeList, choice);
-
-					userContinue = userContinueLoop(
-							"Would you like to check out another book? (Please enter yes to continue and any other key to go back to the main menu) : ");
-				} while (userContinue);
+				// TODO possibly just make a list of books that are currently onshelf??
+				// calls method to check out book
+				completeList = checkOutBook(completeList, userInput);
 				break;
-
-			case 6:
+			case 6: // does not let user continue
 				// TODO possibly just make a list of books that are currently check out??
 				// allows user to return a book
-				do {
-					printOutBooks(completeList);
-					System.out.print("Which book would you like to return? ");
-					int choice = userInput.nextInt();
-					completeList = returnBook(completeList, choice);
-
-					// calls method to check if user would like to return another book
-					userContinue = userContinueLoop(
-							"Would you like to return another book? (Please enter yes to continue and any other key to go back to the main menu) : ");
-				} while (userContinue);
+				completeList = returnBook(completeList, userInput);
 				break;
-
 			case 7:
 				System.out.println("Enjoy reading! We hope to see you soon.");
 				btf.rewriteFile(completeList);
 				System.exit(0);
 				break;
 			}
-
 		} while (userResponse != 7);
 
 		userInput.close();
@@ -130,12 +93,14 @@ public class LibraryApp {
 		 */// layout we can use for book availability
 
 	public static void printOutBooks(List<Book> completeList) throws IOException, ParseException {
-		int i = 1;
 
+		System.out.println("Grand Chirpus Inventory: ");
+		System.out.println("==============================");
+
+		int i = 1;
 		for (Book book : completeList) {
 			System.out.println((i++) + ". " + book.getTitle() + " by " + book.getAuthor());
 		}
-
 	}
 
 	public static void genreList(List<Book> completeList) {
@@ -184,7 +149,6 @@ public class LibraryApp {
 				// create an option to sort through authors or books with keyword
 				System.out.print("Would you like to search through authors or titles? ");
 				String userResponse = userInput.nextLine();
-				userInput.nextLine();
 				// cycles through the list to add to a new list of just books with that key word
 				for (Book book : completeList) {
 					// sorts either authors or titles
@@ -213,6 +177,15 @@ public class LibraryApp {
 				isValid = false;
 			}
 		} while (!isValid);
+
+		System.out.println("Perform another search?(Y for yes, any other key returns to main menu)");
+		String userContinue = userInput.next();
+		userInput.nextLine();
+
+		if (userContinue.equalsIgnoreCase("Y")) {
+			keywordInBooklist(completeList);
+		}
+
 	}
 
 	public static void searchBooks(List<Book> completeList, String search) {
@@ -234,17 +207,34 @@ public class LibraryApp {
 
 	}
 
-	public static void searchByAuthor(List<Book> completeList, String authorName) {
+	public static void searchByAuthor(List<Book> completeList, Scanner userInput) {
 
+		System.out.print("Enter author's name: ");
+		String authorName = userInput.nextLine();
+
+		System.out.println("Books by " + authorName + ": \n");
 		completeList.stream().filter(b -> b.getAuthor().equals(authorName))
 				.forEach(b -> System.out.println(b.toString()));
 
+		System.out.println("Search by another author?(Y for yes, any other key returns to main menu)");
+		String userContinue = userInput.next();
+		userInput.nextLine();
+
+		if (userContinue.equalsIgnoreCase("Y")) {
+			searchByAuthor(completeList, userInput);
+		}
 	}
 
-	public static List<Book> checkOutBook(List<Book> completeList, int choice) throws IOException, ParseException {
+	public static List<Book> checkOutBook(List<Book> completeList, Scanner userInput)
+			throws IOException, ParseException {
 		// sorts through list of all books to find the book requested by user and sets a
 		// due date if book is on shelf, if book is already checked out, it lets the
 		// user know
+		printOutBooks(completeList);
+
+		System.out.print("Which book would you like to check out? ");
+		int choice = userInput.nextInt();
+
 		Book ourBook = completeList.get(choice - 1);
 
 		if (ourBook.getAvailability().equals(BookStatus.ONSHELF)) {
@@ -258,11 +248,24 @@ public class LibraryApp {
 					+ ourBook.getDueDate() + ".");
 		}
 
+		System.out.println("Check out another book?(Y for yes, any other key returns to main menu)");
+		String userContinue = userInput.next();
+		userInput.nextLine();
+
+		if (userContinue.equalsIgnoreCase("Y")) {
+			checkOutBook(completeList, userInput);
+		}
+
 		return completeList;
 	}
 
-	public static List<Book> returnBook(List<Book> completeList, int choice) throws IOException, ParseException {
+	public static List<Book> returnBook(List<Book> completeList, Scanner userInput) throws IOException, ParseException {
 		// checks book at index and sets to onshelf if it was checked out
+		printOutBooks(completeList);
+
+		System.out.print("Which book would you like to check out? ");
+		int choice = userInput.nextInt();
+
 		Book ourBook = completeList.get(choice - 1);
 
 		if (ourBook.getAvailability().equals(BookStatus.CHECKEDOUT)) {
@@ -272,19 +275,16 @@ public class LibraryApp {
 		} else if (completeList.get(choice - 1).getAvailability().equals(BookStatus.ONSHELF)) {
 			System.out.println("That book is already available!");
 		}
-		return completeList;
-	}
 
-	public static boolean userContinueLoop(String prompt) {
-		System.out.print(prompt);
-		String userReturn = userInput.nextLine();
+		System.out.println("Return another book?(Y for yes, any other key returns to main menu)");
+		String userContinue = userInput.next();
+		userInput.nextLine();
 
-		if (userReturn.toLowerCase().equals("y")) {
-			userContinue = true;
-		} else {
-			userContinue = false;
+		if (userContinue.equalsIgnoreCase("Y")) {
+			checkOutBook(completeList, userInput);
 		}
-		return userContinue;
+
+		return completeList;
 	}
 
 	// method to update book i/o file when user quits the program

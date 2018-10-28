@@ -46,10 +46,9 @@ public class LibraryApp {
 			switch (userResponse) {// the value being checked for
 			case 1:
 				// method to list books
-				System.out.print("Grand Chirpus Inventory: ");
-				System.out.println("==============================");
+				System.out.println("Grand Chirpus Inventory: ");
+				System.out.println("========================");
 				printOutBooks(completeList);
-				System.out.println();
 				break;
 
 			case 2:
@@ -73,7 +72,7 @@ public class LibraryApp {
 					System.out.print("Enter author's name: ");
 					String authorName = userInput.nextLine();
 					System.out.println("Books by " + authorName + ": ");
-					searchByAuthor(completeList, authorName);
+					searchBooks(completeList, authorName);
 
 					userContinue = userContinueLoop(
 							"Would you like to search by a different author? (Please enter yes to continue and any other key to go back to the main menu) : ");
@@ -133,8 +132,9 @@ public class LibraryApp {
 	public static void printOutBooks(List<Book> completeList) throws IOException, ParseException {
 		int i = 1;
 
+		System.out.println(String.format("    %-25s %-20s", "Title", "Author"));
 		for (Book book : completeList) {
-			System.out.println((i++) + ". " + book.getTitle() + " by " + book.getAuthor());
+			System.out.println(String.format("%2d. %-25s %-20s", (i++), book.getTitle(), book.getAuthor()));
 		}
 
 	}
@@ -228,22 +228,6 @@ public class LibraryApp {
 		for (Book sortBook : completeList) {
 			if (sortBook.getGenre().equals(search) || sortBook.getAuthor().equals(search)
 					|| sortBook.getTitle().equals(search)) {
-				searchedBookList.add(sortBook);
-			}
-		}
-
-		int i = 1;
-		for (Book book : searchedBookList) {
-			System.out.println((i++) + ". " + book.getTitle() + " by " + book.getAuthor());
-		}
-
-	}
-
-	public static void searchByAuthor(List<Book> completeList, String search) {
-		List<Book> searchedBookList = new ArrayList<>();
-
-		for (Book sortBook : completeList) {
-			if (sortBook.getAuthor().equals(search)) {
 				searchedBookList.add(sortBook);
 			}
 		}

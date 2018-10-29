@@ -11,6 +11,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+//author @ Marque Burgess, Mariah Hall, and Twani Dhar
+
+//Description: Welcome to the Grand Cirpus Library! This libraryApp will allow the user to 
+//checkout books, donate or add books to the library, and allow the user to return books.
+//This application will also allow users to search for an author or title of a book. Have fun reading! 
+
 
 public class LibraryApp {
 

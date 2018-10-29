@@ -17,15 +17,14 @@ public class LibraryApp {
 	private static Scanner userInput = new Scanner(System.in);
 	private static final LocalDate PRINCE = LocalDate.of(1999, Month.JANUARY, 1);
 
-	
 	public static void main(String[] args) throws IOException, ParseException {
 
 		List<Book> completeList = btf.showBooks();
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println();
 
-		
-		
+		// addBooks(completeList);
+
 		int userResponse;
 
 		do {
@@ -82,16 +81,16 @@ public class LibraryApp {
 				completeList = returnBook(completeList, userInput);
 				break;
 			case 7:
-				//allows user to add a book to the list/donate a book.
-					addBooks(completeList);
-					break;
+				// allows user to add a book to the list/donate a book.
+				addBooks(completeList);
+				break;
 			case 8:
 				System.out.println("Enjoy reading! We hope to see you soon.");
 				btf.rewriteFile(completeList);
 				System.exit(0);
 				break;
 			}
-		} while (userResponse != 7);
+		} while (userResponse != 8);
 
 		userInput.close();
 	}/*
@@ -240,8 +239,12 @@ public class LibraryApp {
 		// user know
 		printOutBooks(completeList);
 
-		System.out.print("Which book would you like to check out? ");
-		int choice = userInput.nextInt();
+		System.out.print("\nWhich book would you like to check out? ");
+		int choice = Validator.getChoice(userInput);
+		while (choice < 1 || choice > completeList.size()) {
+			System.out.println("Enter valid entry from book list: ");
+			choice = Validator.getChoice(userInput);
+		}
 
 		Book ourBook = completeList.get(choice - 1);
 
@@ -272,7 +275,11 @@ public class LibraryApp {
 		printOutBooks(completeList);
 
 		System.out.print("Which book would you like to check out? ");
-		int choice = userInput.nextInt();
+		int choice = Validator.getChoice(userInput);
+		while (choice < 1 || choice > completeList.size()) {
+			System.out.println("Enter valid entry from book list: ");
+			choice = Validator.getChoice(userInput);
+		}
 
 		Book ourBook = completeList.get(choice - 1);
 
@@ -305,21 +312,21 @@ public class LibraryApp {
 
 		btf.rewriteFile(updatedBooks);
 	}
-	
-	public static void addBooks(List<Book>completeList) {
-		
-		
+
+	public static void addBooks(List<Book> completeList) {
+
 		System.out.println("What's the book's title?");
 		String title = userInput.nextLine();
 		System.out.println("Who is the author?");
 		String author = userInput.nextLine();
-		System.out.println("What is the genre(s)? Please put a \", \" " );
+		System.out.println("What is the genre(s)? Please put a \", \" ");
 		String genre = userInput.nextLine();
-		
+
 		BookStatus availability = BookStatus.ONSHELF;
 		LocalDate dueDate = PRINCE;
 		completeList.add(new Book(title, author, availability, dueDate, genre));
-		
-		
+
+		System.out.println(completeList);
+
 	}
 }

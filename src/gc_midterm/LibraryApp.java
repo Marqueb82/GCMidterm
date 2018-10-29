@@ -20,12 +20,11 @@ public class LibraryApp {
 
 	public static void main(String[] args) throws IOException, ParseException {
 
-		/***************************************************************************/
 		List<Book> completeList = btf.showBooks();
+		int userResponse;
+
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println();
-
-		int userResponse;
 
 		do {
 			System.out.println("How can we help you today?");
@@ -88,7 +87,7 @@ public class LibraryApp {
 				System.exit(0);
 				break;
 			}
-		} while (userResponse != 7);
+		} while (userResponse != 8);
 
 		userInput.close();
 	}/*
@@ -161,17 +160,17 @@ public class LibraryApp {
 				completeList = btf.showBooks();
 
 				// create an option to sort through authors or books with keyword
-				System.out.print("Would you like to search through authors or titles? ");
+				System.out.print("Would you like to search through author or title? ");
 				String userResponse = Validator.getStringNameRegex(userInput);
 				// cycles through the list to add to a new list of just books with that key word
 				for (Book book : completeList) {
 					// sorts either authors or titles
-					if (userResponse.toLowerCase().contains("authors")) {
+					if (userResponse.toLowerCase().contains("author")) {
 						if (book.getAuthor().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
 						}
-					} else if (userResponse.toLowerCase().contains("titles")) {
+					} else if (userResponse.toLowerCase().contains("title")) {
 						if (book.getTitle().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
@@ -203,6 +202,7 @@ public class LibraryApp {
 	}
 
 	public static void searchBooks(List<Book> completeList, String search) {
+
 		List<Book> searchedBookList = new ArrayList<>();
 		// TODO do we want to keep getAuthor and getTitle as equals or change them to
 		// "contains"
@@ -221,13 +221,17 @@ public class LibraryApp {
 
 	}
 
-	public static void searchByAuthor(List<Book> completeList, Scanner userInput) {
+	public static void searchByAuthor(List<Book> completeList, Scanner userInput) throws IOException, ParseException {
 
-		System.out.print("Enter author's name: ");
+		for (Book b : completeList) {
+			System.out.println(b.getAuthor());
+		}
+
+		System.out.print("\nEnter author's name: ");
 		String authorName = Validator.getStringNameRegex(userInput);
 
 		System.out.println("Books by " + authorName + ": \n");
-		completeList.stream().filter(b -> b.getAuthor().equals(authorName))
+		completeList.stream().filter(b -> b.getAuthor().toLowerCase().equals(authorName))
 				.forEach(b -> System.out.println(b.toString()));
 
 		System.out.println("Search by another author?(Y for yes, any other key returns to main menu)");
@@ -246,8 +250,12 @@ public class LibraryApp {
 		// user know
 		printOutBooks(completeList);
 
-		System.out.print("Which book would you like to check out? ");
-		int choice = userInput.nextInt();
+		System.out.print("\nWhich book would you like to check out? ");
+		int choice = Validator.getChoice(userInput);
+		while (choice < 1 || choice > completeList.size()) {
+			System.out.println("Enter valid entry from book list: ");
+			choice = Validator.getChoice(userInput);
+		}
 
 		Book ourBook = completeList.get(choice - 1);
 
@@ -278,7 +286,11 @@ public class LibraryApp {
 		printOutBooks(completeList);
 
 		System.out.print("Which book would you like to check out? ");
-		int choice = userInput.nextInt();
+		int choice = Validator.getChoice(userInput);
+		while (choice < 1 || choice > completeList.size()) {
+			System.out.println("Enter valid entry from book list: ");
+			choice = Validator.getChoice(userInput);
+		}
 
 		Book ourBook = completeList.get(choice - 1);
 
@@ -315,15 +327,26 @@ public class LibraryApp {
 	public static void addBooks(List<Book> completeList) {
 
 		System.out.println("What's the book's title?");
-		String title = userInput.nextLine();
+		String title = Validator.getStringTitleRegex(userInput);
+
 		System.out.println("Who is the author?");
-		String author = userInput.nextLine();
+		String author = Validator.getStringNameRegex(userInput);
+
 		System.out.println("What is the genre(s)? Please put a \", \" ");
-		String genre = userInput.nextLine();
+		String genre = Validator.getStringNameRegex(userInput);
 
 		BookStatus availability = BookStatus.ONSHELF;
 		LocalDate dueDate = PRINCE;
+
 		completeList.add(new Book(title, author, availability, dueDate, genre));
+
+		System.out.println("Would you like to add/donate another book?(Y for yes, any other key returns to main menu)");
+		String userContinue = userInput.next();
+		userInput.nextLine();
+
+		if (userContinue.equalsIgnoreCase("Y")) {
+			addBooks(completeList);
+		}
 
 	}
 }

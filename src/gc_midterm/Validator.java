@@ -13,8 +13,8 @@ public class Validator {
 
 		try {
 			int num = scnr.nextInt();
-			while (num < 1 || num > 7) {
-				System.out.println("Please input valid number selection 1 - 7");
+			while (num < 1 || num > 8) {
+				System.out.println("Please input valid number selection 1 - 8");
 				num = scnr.nextInt();
 			}
 			scnr.nextLine();
@@ -32,8 +32,8 @@ public class Validator {
 	public static String getStringNameRegex(Scanner scnr) {
 		boolean isValid = false;
 		String input;
-		String regex = "[A-Za-z]{3,15}";
-		String regexTwo = "[A-Za-z ]{3,15}";
+		String regex = "[A-Za-z-.]{3,15}";
+		String regexTwo = "[A-Za-z-. ]{3,15}";
 		do {
 			input = scnr.nextLine();
 

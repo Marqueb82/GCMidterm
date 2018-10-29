@@ -32,8 +32,8 @@ public class Validator {
 	public static String getStringNameRegex(Scanner scnr) {
 		boolean isValid = false;
 		String input;
-		String regex = "[A-Za-z-.]{3,15}";
-		String regexTwo = "[A-Za-z-. ]{3,15}";
+		String regex = "[A-Za-z-.]{3,25}";
+		String regexTwo = "[A-Za-z-. ]{3,25}";
 		do {
 			input = scnr.nextLine();
 
@@ -54,8 +54,8 @@ public class Validator {
 	public static String getStringTitleRegex(Scanner scnr) {
 		boolean isValid = false;
 		String input;
-		String regex = "[A-Za-z0-9]{3,15}";
-		String regexTwo = "[A-Za-z0-9 ]{3,15}";
+		String regex = "[A-Za-z0-9]{2,30}";
+		String regexTwo = "[A-Za-z0-9:' ]{2,30}";
 		do {
 			input = scnr.nextLine();
 
@@ -84,7 +84,7 @@ public class Validator {
 			if (input.matches(regex)) {
 				isValid = true;
 			} else {
-				System.out.println("Input error. There can only be 5 genres listed. Please try again: ");
+				System.out.println("Input error. There can only be up to 5 genres listed. Please try again: ");
 				isValid = false;
 			}
 

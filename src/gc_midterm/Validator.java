@@ -71,6 +71,28 @@ public class Validator {
 	}
 
 	/**
+	 * Get a string of input from the user that must match the given regex.
+	 */
+	public static String getStringGenreRegex(Scanner scnr) {
+		boolean isValid = false;
+		String input;
+		String regex = "[A-Za-z- ]{3,15}[, ]{0, 4}";
+
+		do {
+			input = scnr.nextLine();
+
+			if (input.matches(regex)) {
+				isValid = true;
+			} else {
+				System.out.println("Input error. There can only be 5 genres listed. Please try again: ");
+				isValid = false;
+			}
+
+		} while (!isValid);
+		return input;
+	}
+
+	/**
 	 * Get any valid integer.
 	 */
 	public static int getChoice(Scanner scnr) {

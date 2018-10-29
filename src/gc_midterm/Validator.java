@@ -77,7 +77,7 @@ public class Validator {
 	public static String getStringGenreRegex(Scanner scnr) {
 		boolean isValid = false;
 		String input;
-		String regex = "[A-Za-z- ]{3,15}[, ]{*,4}";
+		String regex = "[A-Za-z-, ]{3,35}";
 
 		do {
 			input = scnr.nextLine();
@@ -101,6 +101,27 @@ public class Validator {
 
 		try {
 			int num = scnr.nextInt();
+			scnr.nextLine();
+			return num;
+		} catch (InputMismatchException e) {
+			System.out.println("Enter a whole number, using digits.");
+			scnr.nextLine();
+			return getInt(scnr);
+		}
+	}
+
+	/**
+	 * Get any valid integer.
+	 */
+	public static int getGenre(Scanner scnr) {
+		// Validate user menu choice.
+
+		try {
+			int num = scnr.nextInt();
+			while (num < 1 || num > 15) {
+				System.out.println("Please input valid number selection 1 - 15");
+				num = scnr.nextInt();
+			}
 			scnr.nextLine();
 			return num;
 		} catch (InputMismatchException e) {

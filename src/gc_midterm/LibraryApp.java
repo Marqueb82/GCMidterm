@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+//author @ Marque Burgess, Mariah Hall, and Twani Dhar
+
+//Description: Welcome to the Grand Chirpus Library! This libraryApp will allow the user to 
+//checkout books, donate or add books to the library, and allow the user to return books.
+//This application will also allow users to search for an author or title of a book. Have fun reading! 
 
 public class LibraryApp {
 
@@ -128,7 +133,7 @@ public class LibraryApp {
 		List<String> listOfGenres = setOfGenres.stream().collect(Collectors.toList());
 		System.out.println();
 		System.out.print("What genre would you like to search by: ");
-		int userSearch = userInput.nextInt();
+		int userSearch = Validator.getGenre(userInput);
 		String genre = listOfGenres.get(userSearch - 1);
 		System.out.print("Books in " + genre.toLowerCase() + ": \n");
 		searchBooks(completeList, genre);
@@ -203,8 +208,8 @@ public class LibraryApp {
 		List<Book> searchedBookList = new ArrayList<>();
 
 		for (Book sortBook : completeList) {
-			if (sortBook.getGenre().equals(search) || sortBook.getAuthor().equals(search)
-					|| sortBook.getTitle().equals(search)) {
+			if (sortBook.getGenre().contains(search) || sortBook.getAuthor().contains(search)
+					|| sortBook.getTitle().contains(search)) {
 				searchedBookList.add(sortBook);
 			}
 		}
@@ -228,7 +233,7 @@ public class LibraryApp {
 		String authorName = Validator.getStringNameRegex(userInput);
 
 		System.out.println("Books by " + authorName + ": \n");
-		completeList.stream().filter(b -> b.getAuthor().toLowerCase().equals(authorName))
+		completeList.stream().filter(b -> b.getAuthor().toLowerCase().contains(authorName))
 				.forEach(b -> System.out.println(b.toString()));
 
 		// calls method again if user answers starting with y
@@ -262,15 +267,17 @@ public class LibraryApp {
 			LocalDate today = LocalDate.now();
 			LocalDate dueDate = today.plus(14, ChronoUnit.DAYS);
 			ourBook.setDueDate(dueDate);
-			System.out.println("\nYou're checking out " + completeList.get(choice - 1).toString());
+			System.out.println("\nYou have checked out: \n" + completeList.get(choice - 1).toString());
 		} else if (completeList.get(choice - 1).getAvailability().equals(BookStatus.CHECKEDOUT)) {
 			System.out.println("Sorry, that book has already been checked out. It is due back to the library "
 					+ ourBook.getDueDate() + ".");
 		}
-
 		// calls method again if user answers starting with y
+
+		System.out.println("");
 		System.out
 				.println("Would you like to check out another book? (Y for yes, any other key returns to main menu) ");
+
 		String userContinue = userInput.next();
 		userInput.nextLine();
 

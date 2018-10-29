@@ -20,7 +20,6 @@ public class LibraryApp {
 	
 	public static void main(String[] args) throws IOException, ParseException {
 
-		/***************************************************************************/
 		List<Book> completeList = btf.showBooks();
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println();

@@ -14,7 +14,7 @@ public class Validator {
 		try {
 			int num = scnr.nextInt();
 			while (num < 1 || num > 8) {
-				System.out.println("Please input valid number selection 1 - 7");
+				System.out.println("Please input valid number selection 1 - 8");
 				num = scnr.nextInt();
 			}
 			scnr.nextLine();

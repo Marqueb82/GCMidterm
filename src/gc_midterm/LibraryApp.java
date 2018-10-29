@@ -315,18 +315,28 @@ public class LibraryApp {
 
 	public static void addBooks(List<Book> completeList) {
 
+		
+		
+		
 		System.out.println("What's the book's title?");
-		String title = userInput.nextLine();
+		String title = Validator.getStringTitleRegex(userInput);
 		System.out.println("Who is the author?");
-		String author = userInput.nextLine();
+		String author = Validator.getStringNameRegex(userInput);
 		System.out.println("What is the genre(s)? Please put a \", \" ");
-		String genre = userInput.nextLine();
+		String genre = Validator.getStringNameRegex(userInput);
 
 		BookStatus availability = BookStatus.ONSHELF;
 		LocalDate dueDate = PRINCE;
 		completeList.add(new Book(title, author, availability, dueDate, genre));
 
-		System.out.println(completeList);
+		System.out.println("Would you like to add/donate another book?(Y for yes, any other key returns to main menu)");
+		String userContinue = userInput.next();
+		userInput.nextLine();
+
+		if (userContinue.equalsIgnoreCase("Y")) {
+			addBooks(completeList);
+		}
+		
 
 	}
 }

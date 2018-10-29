@@ -338,13 +338,10 @@ public class LibraryApp {
 		System.out.println("Who is the author?");
 		System.out.print("Please enter the Author's full name: ");
 		String author = Validator.getStringNameRegex(userInput);
-
 		System.out.print("Please enter the book's genre(s)? Please put a \", \" in-between genres. ");
 		String genre = Validator.getStringGenreRegex(userInput);
-
 		BookStatus availability = BookStatus.ONSHELF;
 		LocalDate dueDate = PRINCE;
-
 		completeList.add(new Book(title, author, availability, dueDate, genre));
 
 		// calls method again if user answers starting with y

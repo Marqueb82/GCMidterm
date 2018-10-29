@@ -117,7 +117,7 @@ public class LibraryApp {
 		// book
 		for (Book book : completeList) {
 			singleGenre = book.getGenre();
-			genresIncluded = singleGenre.split(","); // allows for 5 possible genres per book
+			genresIncluded = singleGenre.split(", "); // allows for 5 possible genres per book
 
 			// sorts through the string array to add possible genres (unless they're null)
 			// to a hashset to account for duplicates
@@ -130,7 +130,7 @@ public class LibraryApp {
 
 		// prints out list itself
 		for (String genre : listOfGenres) {
-			System.out.println(i + ". " + genre);
+			System.out.println(String.format("%2d. %-20s", i, genre));
 			i++;
 		}
 	}

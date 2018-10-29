@@ -63,10 +63,9 @@ public class Book {
 
 	@Override
 	public String toString() {
+		int i = 0;
 		// TM AM SM DDM GM
-		return String.format("%-25s %25s %20s %10s %15s%n %-25s %25s %20s %10s %15s", "Title: ", "Author: ",
-				"Book Status (Available or checked out): ", "Due Date: ", "Genre: ", getTitle(), getAuthor(),
-				getAvailability(), getDueDate(), getGenre());
+		return String.format("    %-25s %-20s%n%2d. %-25s %-20s", "Title", "Author", (i++), getTitle(), getAuthor());
 	}
 
 }

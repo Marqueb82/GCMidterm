@@ -45,6 +45,7 @@ public class Validator {
 			}
 
 		} while (!isValid);
+
 		return input;
 	}
 

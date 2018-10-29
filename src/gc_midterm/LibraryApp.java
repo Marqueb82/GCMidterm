@@ -326,21 +326,80 @@ public class LibraryApp {
 	}
 
 	public static void addBooks(List<Book> completeList) {
+		String[] titleArray = new String[20];
+		List<String> titleComponentList = new ArrayList<>();
+		String[] authorArray = new String[5];
+		List<String> authorComponentList = new ArrayList<>();
+		String[] genreArray = new String[3];
+		List<String> genreComponentList = new ArrayList<>();
 
 		System.out.print("Please enter the book's title: ");
 		String title = Validator.getStringTitleRegex(userInput);
-		title = title.substring(0, 1).toUpperCase() + title.substring(1);
+
+		titleArray = title.split(" ");
+
+		// assigns proper capitalization
+		for (String titlePart : titleArray) {
+			if (!titlePart.equals(" a ") && !titlePart.equals(" the ") && !titlePart.equals(" for ")
+					&& !titlePart.equals(" an ") && !titlePart.equals(" and ") && !titlePart.equals(" of ")
+					&& !titlePart.equals(" in ") && !titlePart.equals(" but ") && !titlePart.equals(" by ")) {
+				titlePart = titlePart.substring(0, 1).toUpperCase() + titlePart.substring(1).toLowerCase();
+				titleComponentList.add(titlePart);
+			} else {
+				// set to lower case
+				titlePart = titlePart.toLowerCase();
+				titleComponentList.add(titlePart);
+			}
+		}
+
+		String titleCaps = "";
+
+		// takes parts of the title that have been properly capitalized and puts them
+		// into the list properly
+		for (String titlePart : titleComponentList) {
+			titleCaps += titlePart + " ";
+		}
 
 		System.out.print("Please enter the Author's full name: ");
 		String author = Validator.getStringNameRegex(userInput);
 
+		authorArray = author.split(" ");
+
+		// assigns proper capitalization
+		for (String authorPart : authorArray) {
+			authorPart = authorPart.substring(0, 1).toUpperCase() + authorPart.substring(1).toLowerCase();
+			authorComponentList.add(authorPart);
+		}
+
+		String authorCaps = "";
+		// takes parts of the title that have been properly capitalized and puts them
+		// into the list properly
+		for (String authorPart : authorComponentList) {
+			authorCaps += authorPart + " ";
+		}
+
 		System.out.print("Please enter the book's genre(s)? Please put a \", \" in-between genres. ");
 		String genre = Validator.getStringGenreRegex(userInput);
+
+		genreArray = genre.split(" ");
+
+		// assigns proper capitalization
+		for (String genrePart : genreArray) {
+			genrePart = genrePart.substring(0, 1).toUpperCase() + genrePart.substring(1).toLowerCase();
+			genreComponentList.add(genrePart);
+		}
+
+		String genreCaps = "";
+		// takes parts of the title that have been properly capitalized and puts them
+		// into the list properly
+		for (String genrePart : genreComponentList) {
+			genreCaps += genrePart + " ";
+		}
 
 		BookStatus availability = BookStatus.ONSHELF;
 		LocalDate dueDate = PRINCE;
 
-		completeList.add(new Book(title, author, availability, dueDate, genre));
+		completeList.add(new Book(titleCaps.trim(), authorCaps.trim(), availability, dueDate, genreCaps.trim()));
 
 		// calls method again if user answers starting with y
 		System.out.print(

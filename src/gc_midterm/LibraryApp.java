@@ -328,7 +328,7 @@ public class LibraryApp {
 
 		System.out.println("What's the book's title?");
 		String title = Validator.getStringTitleRegex(userInput);
-
+		title = title.substring(0, 1).toUpperCase() + title.substring(1);
 		System.out.println("Who is the author?");
 		String author = Validator.getStringNameRegex(userInput);
 

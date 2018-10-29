@@ -76,7 +76,7 @@ public class Validator {
 	public static String getStringGenreRegex(Scanner scnr) {
 		boolean isValid = false;
 		String input;
-		String regex = "[A-Za-z- ]{3,15}[, ]{0, 4}";
+		String regex = "[A-Za-z-, ]{3,35}";
 
 		do {
 			input = scnr.nextLine();

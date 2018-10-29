@@ -103,12 +103,9 @@ public class BookTextFile {
 		for (Book item : completeList) {
 			String line = item.getTitle() + "///" + item.getAuthor() + "///" + item.getAvailability() + "///"
 					+ item.getDueDate() + "///" + item.getGenre();
-			newLines = Arrays.asList(line);
+			newLines.add(line);
 		}
 
-
-		List<String> newLines = Arrays.asList(new String[] { items.toString() });
-	
 		Files.write(filePath, newLines, StandardOpenOption.TRUNCATE_EXISTING);
 	}
 

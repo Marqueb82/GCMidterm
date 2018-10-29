@@ -91,7 +91,7 @@ public class LibraryApp {
 				System.exit(0);
 				break;
 			}
-		} while (userResponse != 7);
+		} while (userResponse != 8);
 
 		userInput.close();
 	}/*
@@ -240,9 +240,10 @@ public class LibraryApp {
 		// user know
 		printOutBooks(completeList);
 
-		System.out.print("Which book would you like to check out? ");
+		System.out.print("\nWhich book would you like to check out? ");
 		int choice = Validator.getChoice(userInput);
 		while (choice < 1 || choice > completeList.size()) {
+			System.out.println("Enter valid entry from book list: ");
 			choice = Validator.getChoice(userInput);
 		}
 
@@ -275,7 +276,11 @@ public class LibraryApp {
 		printOutBooks(completeList);
 
 		System.out.print("Which book would you like to check out? ");
-		int choice = userInput.nextInt();
+		int choice = Validator.getChoice(userInput);
+		while (choice < 1 || choice > completeList.size()) {
+			System.out.println("Enter valid entry from book list: ");
+			choice = Validator.getChoice(userInput);
+		}
 
 		Book ourBook = completeList.get(choice - 1);
 

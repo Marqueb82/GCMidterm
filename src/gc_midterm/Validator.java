@@ -13,7 +13,7 @@ public class Validator {
 
 		try {
 			int num = scnr.nextInt();
-			while (num < 1 || num > 7) {
+			while (num < 1 || num > 8) {
 				System.out.println("Please input valid number selection 1 - 7");
 				num = scnr.nextInt();
 			}

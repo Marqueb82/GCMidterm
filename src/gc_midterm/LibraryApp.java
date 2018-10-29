@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LibraryApp {
 
@@ -17,7 +18,6 @@ public class LibraryApp {
 	private static Scanner userInput = new Scanner(System.in);
 	private static final LocalDate PRINCE = LocalDate.of(1999, Month.JANUARY, 1);
 
-	
 	public static void main(String[] args) throws IOException, ParseException {
 
 		/***************************************************************************/
@@ -25,8 +25,6 @@ public class LibraryApp {
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println();
 
-		
-		
 		int userResponse;
 
 		do {
@@ -58,11 +56,9 @@ public class LibraryApp {
 
 				// method for searching books by genre
 				System.out.println("What genre would you like to search by: ");
-				genreList(completeList);
-				String userSearch = userInput.nextLine();
-				// TODO
-				System.out.print("Books in " /* + genreVariable */ + ": ");
-				searchBooks(completeList, userSearch);
+				String genre = genreList(completeList);
+				System.out.print("Books in " + genre + ": ");
+				searchBooks(completeList, genre);
 				break;
 			case 3:
 				// calls method to search books by author
@@ -83,9 +79,9 @@ public class LibraryApp {
 				completeList = returnBook(completeList, userInput);
 				break;
 			case 7:
-				//allows user to add a book to the list/donate a book.
-					addBooks(completeList);
-					break;
+				// allows user to add a book to the list/donate a book.
+				addBooks(completeList);
+				break;
 			case 8:
 				System.out.println("Enjoy reading! We hope to see you soon.");
 				btf.rewriteFile(completeList);
@@ -112,12 +108,12 @@ public class LibraryApp {
 		}
 	}
 
-	public static void genreList(List<Book> completeList) {
+	public static String genreList(List<Book> completeList) {
 		// TODO create a validator in user input that user may only enter 5 genres if
 		// adding a book
 		String[] genresIncluded = new String[5];
 		String singleGenre = null;
-		Set<String> listOfGenres = new HashSet<>(); // hashset to get rid of duplicate genres (and to account for user
+		Set<String> setOfGenres = new HashSet<>(); // hashset to get rid of duplicate genres (and to account for user
 													// entry genre that may not be included in original list)
 		int i = 1; // variable for number options on genre menu
 
@@ -131,16 +127,25 @@ public class LibraryApp {
 			// to a hashset to account for duplicates
 			for (String genre : genresIncluded) {
 				if (genre != null) {
-					listOfGenres.add(genre);
+					setOfGenres.add(genre);
 				}
 			}
 		}
 
 		// prints out list itself
-		for (String genre : listOfGenres) {
+		for (String genre : setOfGenres) {
 			System.out.println(String.format("%2d. %-20s", i, genre));
 			i++;
 		}
+
+		int userSearch = userInput.nextInt();
+
+		List<String> listOfGenres = setOfGenres.stream().collect(Collectors.toList());
+
+		String genre = listOfGenres.get(userSearch - 1);
+
+		return genre;
+
 	}
 
 	public static void keywordInBooklist(List<Book> completeList) {
@@ -306,21 +311,19 @@ public class LibraryApp {
 
 		btf.rewriteFile(updatedBooks);
 	}
-	
-	public static void addBooks(List<Book>completeList) {
-		
-		
+
+	public static void addBooks(List<Book> completeList) {
+
 		System.out.println("What's the book's title?");
 		String title = userInput.nextLine();
 		System.out.println("Who is the author?");
 		String author = userInput.nextLine();
-		System.out.println("What is the genre(s)? Please put a \", \" " );
+		System.out.println("What is the genre(s)? Please put a \", \" ");
 		String genre = userInput.nextLine();
-		
+
 		BookStatus availability = BookStatus.ONSHELF;
 		LocalDate dueDate = PRINCE;
 		completeList.add(new Book(title, author, availability, dueDate, genre));
-		
-		
+
 	}
 }

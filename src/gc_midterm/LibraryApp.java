@@ -22,13 +22,13 @@ public class LibraryApp {
 		/***************************************************************************/
 		List<Book> completeList = btf.showBooks();
 		System.out.println("Welcome to Grand Chirpus library!");
-		System.out.println("How can we help you today?");
+		System.out.println();
 
 		int userResponse;
 
 		do {
-
-			System.out.println("");
+			System.out.println("How can we help you today?");
+			System.out.println();
 			System.out.println(" 1. See a list of books.");
 			System.out.println(" 2. Select a genre.");
 			System.out.println(" 3. Search by author.");
@@ -47,6 +47,7 @@ public class LibraryApp {
 			case 1:
 				// method to list books
 				printOutBooks(completeList);
+				System.out.println();
 				break;
 			case 2: // **check method**
 				// **returns same genre type multiple times

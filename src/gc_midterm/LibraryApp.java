@@ -20,12 +20,10 @@ public class LibraryApp {
 	public static void main(String[] args) throws IOException, ParseException {
 
 		List<Book> completeList = btf.showBooks();
+		int userResponse;
+
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println();
-
-		// addBooks(completeList);
-
-		int userResponse;
 
 		do {
 			System.out.println("How can we help you today?");
@@ -154,17 +152,17 @@ public class LibraryApp {
 				completeList = btf.showBooks();
 
 				// create an option to sort through authors or books with keyword
-				System.out.print("Would you like to search through authors or titles? ");
+				System.out.print("Would you like to search through author or title? ");
 				String userResponse = Validator.getStringNameRegex(userInput);
 				// cycles through the list to add to a new list of just books with that key word
 				for (Book book : completeList) {
 					// sorts either authors or titles
-					if (userResponse.toLowerCase().contains("authors")) {
+					if (userResponse.toLowerCase().contains("author")) {
 						if (book.getAuthor().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
 						}
-					} else if (userResponse.toLowerCase().contains("titles")) {
+					} else if (userResponse.toLowerCase().contains("title")) {
 						if (book.getTitle().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
@@ -220,7 +218,7 @@ public class LibraryApp {
 		String authorName = Validator.getStringNameRegex(userInput);
 
 		System.out.println("Books by " + authorName + ": \n");
-		completeList.stream().filter(b -> b.getAuthor().equals(authorName))
+		completeList.stream().filter(b -> b.getAuthor().toLowerCase().equals(authorName))
 				.forEach(b -> System.out.println(b.toString()));
 
 		System.out.println("Search by another author?(Y for yes, any other key returns to main menu)");
@@ -315,9 +313,6 @@ public class LibraryApp {
 
 	public static void addBooks(List<Book> completeList) {
 
-		
-		
-		
 		System.out.println("What's the book's title?");
 		String title = Validator.getStringTitleRegex(userInput);
 		System.out.println("Who is the author?");
@@ -336,7 +331,6 @@ public class LibraryApp {
 		if (userContinue.equalsIgnoreCase("Y")) {
 			addBooks(completeList);
 		}
-		
 
 	}
 }

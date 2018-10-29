@@ -32,8 +32,8 @@ public class Validator {
 	public static String getStringNameRegex(Scanner scnr) {
 		boolean isValid = false;
 		String input;
-		String regex = "[A-Za-z]{3,15}";
-		String regexTwo = "[A-Za-z ]{3,15}";
+		String regex = "[A-Za-z-]{3,15}";
+		String regexTwo = "[A-Za-z- ]{3,15}";
 		do {
 			input = scnr.nextLine();
 

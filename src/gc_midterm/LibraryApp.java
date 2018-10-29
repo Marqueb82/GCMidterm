@@ -37,7 +37,8 @@ public class LibraryApp {
 			System.out.println(" 4. Search by keyword.");
 			System.out.println(" 5. Select a book to checkout.");
 			System.out.println(" 6. Return a book.");
-			System.out.println(" 7. Exit Grand Chirpus Directory.");
+			System.out.println(" 7. Add/donate a book.");
+			System.out.println(" 8. Exit Grand Chirpus Directory.");
 			System.out.println();
 
 			System.out.print("Please select the number that you would like explore: ");
@@ -81,6 +82,10 @@ public class LibraryApp {
 				completeList = returnBook(completeList, userInput);
 				break;
 			case 7:
+				// allows user to add a book to the list/donate a book.
+				addBooks(completeList);
+				break;
+			case 8:
 				System.out.println("Enjoy reading! We hope to see you soon.");
 				btf.rewriteFile(completeList);
 				System.exit(0);
@@ -318,5 +323,6 @@ public class LibraryApp {
 		completeList.add(new Book(title, author, availability, dueDate, genre));
 
 		System.out.println(completeList);
+
 	}
 }

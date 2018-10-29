@@ -208,7 +208,8 @@ public class LibraryApp {
 		List<Book> searchedBookList = new ArrayList<>();
 
 		for (Book sortBook : completeList) {
-			if (sortBook.getGenre().contains(search.toLowerCase()) || sortBook.getAuthor().contains(search.toLowerCase())
+			if (sortBook.getGenre().contains(search.toLowerCase())
+					|| sortBook.getAuthor().contains(search.toLowerCase())
 					|| sortBook.getTitle().contains(search.toLowerCase())) {
 				searchedBookList.add(sortBook);
 			}
@@ -225,16 +226,16 @@ public class LibraryApp {
 
 	public static void searchByAuthor(List<Book> completeList, Scanner userInput) throws IOException, ParseException {
 
-		for (Book b : completeList) {
-			System.out.println(b.getAuthor());
+		for (Book book : completeList) {
+			System.out.println(book.getAuthor());
 		}
 
 		System.out.print("\nEnter author's name: ");
 		String authorName = Validator.getStringNameRegex(userInput);
 
 		System.out.println("Books by " + authorName + ": \n");
-		completeList.stream().filter(b -> b.getAuthor().toLowerCase().contains(authorName.toLowerCase()))
-				.forEach(b -> System.out.println(b.toString()));
+		completeList.stream().filter(book -> book.getAuthor().toLowerCase().contains(authorName.toLowerCase()))
+				.forEach(book -> System.out.println(book.toString()));
 
 		// calls method again if user answers starting with y
 		System.out.print("Search by another author? (Y for yes, any other key returns to main menu) ");

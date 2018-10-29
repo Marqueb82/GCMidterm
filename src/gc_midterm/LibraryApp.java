@@ -135,7 +135,7 @@ public class LibraryApp {
 		System.out.print("Enter a whole number associated with the genre: ");
 		int userSearch = Validator.getGenre(userInput);
 		String genre = listOfGenres.get(userSearch - 1);
-		System.out.print("Books in " + genre.toLowerCase() + ": \n");
+		System.out.print("Books in " + genre + ": \n");
 		searchBooks(completeList, genre);
 
 		// calls method again if user answers starting with y
@@ -167,12 +167,12 @@ public class LibraryApp {
 				// cycles through the list to add to a new list of just books with that key word
 				for (Book book : completeList) {
 					// sorts either authors or titles
-					if (userResponse.toLowerCase().contains("author".toLowerCase())) {
+					if (userResponse.toLowerCase().contains("author")) {
 						if (book.getAuthor().toLowerCase().contains(userKeyword.toLowerCase())) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
 						}
-					} else if (userResponse.toLowerCase().contains("title".toLowerCase())) {
+					} else if (userResponse.toLowerCase().contains("title")) {
 						if (book.getTitle().toLowerCase().contains(userKeyword.toLowerCase())) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
@@ -208,8 +208,8 @@ public class LibraryApp {
 		List<Book> searchedBookList = new ArrayList<>();
 
 		for (Book sortBook : completeList) {
-			if (sortBook.getGenre().contains(search.toLowerCase()) || sortBook.getAuthor().contains(search.toLowerCase())
-					|| sortBook.getTitle().contains(search.toLowerCase())) {
+			if (sortBook.getGenre().contains(search) || sortBook.getAuthor().contains(search)
+					|| sortBook.getTitle().contains(search)) {
 				searchedBookList.add(sortBook);
 			}
 		}

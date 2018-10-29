@@ -8,9 +8,9 @@ public class Validator {
 	/**
 	 * Get any valid integer.
 	 */
-	public static int getInt(Scanner scnr, String prompt) {
-		// This approach uses exception handling.
-		System.out.print(prompt);
+	public static int getInt(Scanner scnr) {
+		// Validate user menu choice.
+
 		try {
 			int num = scnr.nextInt();
 			while (num < 1 || num > 7) {
@@ -22,18 +22,18 @@ public class Validator {
 		} catch (InputMismatchException e) {
 			System.out.println("Enter a whole number, using digits.");
 			scnr.nextLine();
-			return getInt(scnr, prompt);
+			return getInt(scnr);
 		}
 	}
 
 	/**
 	 * Get a string of input from the user that must match the given regex.
 	 */
-	public static String getStringMatchingRegex(Scanner scnr) {
+	public static String getStringNameRegex(Scanner scnr) {
 		boolean isValid = false;
 		String input;
-		String regex = "[A-Za-z0-9]";
-		String regexTwo = "[A-Za-z0-9 ]";
+		String regex = "[A-Za-z]{3,15}";
+		String regexTwo = "[A-Za-z ]{3,15}";
 		do {
 			input = scnr.nextLine();
 
@@ -46,6 +46,45 @@ public class Validator {
 
 		} while (!isValid);
 		return input;
+	}
+
+	/**
+	 * Get a string of input from the user that must match the given regex.
+	 */
+	public static String getStringTitleRegex(Scanner scnr) {
+		boolean isValid = false;
+		String input;
+		String regex = "[A-Za-z0-9]{3,15}";
+		String regexTwo = "[A-Za-z0-9 ]{3,15}";
+		do {
+			input = scnr.nextLine();
+
+			if (input.matches(regex) || input.matches(regexTwo)) {
+				isValid = true;
+			} else {
+				System.out.println("Input Error, please try again: ");
+				isValid = false;
+			}
+
+		} while (!isValid);
+		return input;
+	}
+
+	/**
+	 * Get any valid integer.
+	 */
+	public static int getChoice(Scanner scnr) {
+		// Validate user menu choice.
+
+		try {
+			int num = scnr.nextInt();
+			scnr.nextLine();
+			return num;
+		} catch (InputMismatchException e) {
+			System.out.println("Enter a whole number, using digits.");
+			scnr.nextLine();
+			return getInt(scnr);
+		}
 	}
 
 }

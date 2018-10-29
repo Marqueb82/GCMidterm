@@ -39,9 +39,8 @@ public class LibraryApp {
 			System.out.println();
 
 			System.out.print("Please select the number that you would like explore: ");
-			userResponse = userInput.nextInt();
+			userResponse = Validator.getInt(userInput);
 			System.out.println();
-			userInput.nextLine();
 
 			switch (userResponse) {// the value being checked for
 			case 1:
@@ -143,26 +142,26 @@ public class LibraryApp {
 		do {
 			try {
 				System.out.print("Please enter a keyword to search: ");
-				String userKeyword = userInput.nextLine();
+				String userKeyword = Validator.getStringTitleRegex(userInput);
 
 				// creates a list to cycle through
 				completeList = btf.showBooks();
 
 				// create an option to sort through authors or books with keyword
 				System.out.print("Would you like to search through authors or titles? ");
-				String userResponse = userInput.nextLine();
+				String userResponse = Validator.getStringNameRegex(userInput);
 				// cycles through the list to add to a new list of just books with that key word
 				for (Book book : completeList) {
 					// sorts either authors or titles
-					if (userResponse.toLowerCase().contains("author")) {
+					if (userResponse.toLowerCase().contains("authors")) {
 						if (book.getAuthor().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
-							System.out.println(book.getTitle() + " " + book.getAuthor());
+							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
 						}
-					} else if (userResponse.toLowerCase().contains("title")) {
+					} else if (userResponse.toLowerCase().contains("titles")) {
 						if (book.getTitle().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
-							System.out.println(book.getTitle() + " " + book.getAuthor());
+							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
 						}
 					}
 					// if no books were added to the list, it lets the user know
@@ -212,7 +211,7 @@ public class LibraryApp {
 	public static void searchByAuthor(List<Book> completeList, Scanner userInput) {
 
 		System.out.print("Enter author's name: ");
-		String authorName = userInput.nextLine();
+		String authorName = Validator.getStringNameRegex(userInput);
 
 		System.out.println("Books by " + authorName + ": \n");
 		completeList.stream().filter(b -> b.getAuthor().equals(authorName))

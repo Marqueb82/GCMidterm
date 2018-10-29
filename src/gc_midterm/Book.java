@@ -65,6 +65,7 @@ public class Book {
 	public String toString() {
 		int i = 0;
 		// TM AM SM DDM GM
+
 		return String.format("    %-25s %-20s%n%2d. %-25s %-20s", "Title", "Author", (i++), getTitle(), getAuthor());
 	}
 

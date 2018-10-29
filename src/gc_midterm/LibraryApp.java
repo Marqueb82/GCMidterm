@@ -18,6 +18,8 @@ public class LibraryApp {
 	private static final LocalDate PRINCE = LocalDate.of(1999, Month.JANUARY, 1);
 
 	public static void main(String[] args) throws IOException, ParseException {
+
+		/***************************************************************************/
 		List<Book> completeList = btf.showBooks();
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println();
@@ -59,7 +61,6 @@ public class LibraryApp {
 				System.out.print("Books in " /* + genreVariable */ + ": ");
 				searchBooks(completeList, userSearch);
 				break;
-
 			case 3:
 				// calls method to search books by author
 				searchByAuthor(completeList, userInput);
@@ -282,7 +283,7 @@ public class LibraryApp {
 		userInput.nextLine();
 
 		if (userContinue.equalsIgnoreCase("Y")) {
-			checkOutBook(completeList, userInput);
+			returnBook(completeList, userInput);
 		}
 
 		return completeList;
@@ -298,4 +299,5 @@ public class LibraryApp {
 
 		btf.rewriteFile(updatedBooks);
 	}
+
 }

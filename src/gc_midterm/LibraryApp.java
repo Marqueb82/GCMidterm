@@ -19,7 +19,6 @@ public class LibraryApp {
 
 	public static void main(String[] args) throws IOException, ParseException {
 
-		/***************************************************************************/
 		List<Book> completeList = btf.showBooks();
 		int userResponse;
 
@@ -315,7 +314,7 @@ public class LibraryApp {
 	public static void addBooks(List<Book> completeList) {
 
 		System.out.println("What's the book's title?");
-		String title = Validator.getStringTitleRegex(userInput)
+		String title = Validator.getStringTitleRegex(userInput);
 		System.out.println("Who is the author?");
 		String author = Validator.getStringNameRegex(userInput);
 		System.out.println("What is the genre(s)? Please put a \", \" ");
@@ -325,7 +324,13 @@ public class LibraryApp {
 		LocalDate dueDate = PRINCE;
 		completeList.add(new Book(title, author, availability, dueDate, genre));
 
-		System.out.println(completeList);
+		System.out.println("Would you like to add/donate another book?(Y for yes, any other key returns to main menu)");
+		String userContinue = userInput.next();
+		userInput.nextLine();
+
+		if (userContinue.equalsIgnoreCase("Y")) {
+			addBooks(completeList);
+		}
 
 	}
 }

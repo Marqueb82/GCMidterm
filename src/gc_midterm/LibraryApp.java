@@ -49,15 +49,9 @@ public class LibraryApp {
 				printOutBooks(completeList);
 				System.out.println();
 				break;
-			case 2: // **check method**
-				// **returns same genre type multiple times
-				// **will not show books after seletiong genre
-
+			case 2:
 				// method for searching books by genre
-				System.out.println("What genre would you like to search by: ");
-				String genre = genreList(completeList);
-				System.out.print("Books in " + genre + ": ");
-				searchBooks(completeList, genre);
+				genreList(completeList);
 				break;
 			case 3:
 				// calls method to search books by author
@@ -107,7 +101,7 @@ public class LibraryApp {
 		}
 	}
 
-	public static String genreList(List<Book> completeList) {
+	public static void genreList(List<Book> completeList) {
 		// TODO create a validator in user input that user may only enter 5 genres if
 		// adding a book
 		String[] genresIncluded = new String[5];
@@ -137,13 +131,20 @@ public class LibraryApp {
 			i++;
 		}
 
-		int userSearch = userInput.nextInt();
-
 		List<String> listOfGenres = setOfGenres.stream().collect(Collectors.toList());
-
+		System.out.print("What genre would you like to search by: ");
+		int userSearch = userInput.nextInt();
 		String genre = listOfGenres.get(userSearch - 1);
+		System.out.print("Books in " + genre.toLowerCase() + ": \n");
+		searchBooks(completeList, genre);
 
-		return genre;
+		System.out.print("Search by another author? (Y for yes, any other key returns to main menu)");
+		String userContinue = userInput.next();
+		userInput.nextLine();
+
+		if (userContinue.equalsIgnoreCase("Y")) {
+			genreList(completeList);
+		}
 
 	}
 
@@ -191,7 +192,7 @@ public class LibraryApp {
 			}
 		} while (!isValid);
 
-		System.out.println("Perform another search?(Y for yes, any other key returns to main menu)");
+		System.out.print("Perform another search? (Y for yes, any other key returns to main menu)");
 		String userContinue = userInput.next();
 		userInput.nextLine();
 
@@ -214,10 +215,12 @@ public class LibraryApp {
 			}
 		}
 
+		System.out.println(String.format("    %-25s %-20s", "Title", "Author"));
 		int i = 1;
 		for (Book book : searchedBookList) {
-			System.out.println((i++) + ". " + book.getTitle() + " by " + book.getAuthor());
+			System.out.println(String.format("%2d. %-25s %-20s", (i++), book.getTitle(), book.getAuthor()));
 		}
+		System.out.println();
 
 	}
 
@@ -234,7 +237,7 @@ public class LibraryApp {
 		completeList.stream().filter(b -> b.getAuthor().toLowerCase().equals(authorName))
 				.forEach(b -> System.out.println(b.toString()));
 
-		System.out.println("Search by another author?(Y for yes, any other key returns to main menu)");
+		System.out.print("Search by another author? (Y for yes, any other key returns to main menu)");
 		String userContinue = userInput.next();
 		userInput.nextLine();
 
@@ -253,7 +256,7 @@ public class LibraryApp {
 		System.out.print("\nWhich book would you like to check out? ");
 		int choice = Validator.getChoice(userInput);
 		while (choice < 1 || choice > completeList.size()) {
-			System.out.println("Enter valid entry from book list: ");
+			System.out.print("Enter valid entry from book list: ");
 			choice = Validator.getChoice(userInput);
 		}
 
@@ -264,7 +267,7 @@ public class LibraryApp {
 			LocalDate today = LocalDate.now();
 			LocalDate dueDate = today.plus(14, ChronoUnit.DAYS);
 			ourBook.setDueDate(dueDate);
-			System.out.println("\nYour checking out " + completeList.get(choice - 1).toString());
+			System.out.println("\nYou're checking out " + completeList.get(choice - 1).toString());
 		} else if (completeList.get(choice - 1).getAvailability().equals(BookStatus.CHECKEDOUT)) {
 			System.out.println("Sorry, that book has already been checked out. It is due back to the library "
 					+ ourBook.getDueDate() + ".");
@@ -288,7 +291,7 @@ public class LibraryApp {
 		System.out.print("Which book would you like to check out? ");
 		int choice = Validator.getChoice(userInput);
 		while (choice < 1 || choice > completeList.size()) {
-			System.out.println("Enter valid entry from book list: ");
+			System.out.print("Enter valid entry from book list: ");
 			choice = Validator.getChoice(userInput);
 		}
 
@@ -302,7 +305,7 @@ public class LibraryApp {
 			System.out.println("That book is already available!");
 		}
 
-		System.out.println("Return another book?(Y for yes, any other key returns to main menu)");
+		System.out.print("Return another book? (Y for yes, any other key returns to main menu)");
 		String userContinue = userInput.next();
 		userInput.nextLine();
 
@@ -326,21 +329,22 @@ public class LibraryApp {
 
 	public static void addBooks(List<Book> completeList) {
 
-		System.out.println("What's the book's title?");
+		System.out.print("Please enter the book's title: ");
 		String title = Validator.getStringTitleRegex(userInput);
 
-		System.out.println("Who is the author?");
+		System.out.print("Please enter the Author's full name: ");
 		String author = Validator.getStringNameRegex(userInput);
 
-		System.out.println("What is the genre(s)? Please put a \", \" ");
-		String genre = Validator.getStringNameRegex(userInput);
+		System.out.println("Please enter the genre(s)? Please put a \", \" in-between genres.");
+		String genre = Validator.getStringGenreRegex(userInput);
 
 		BookStatus availability = BookStatus.ONSHELF;
 		LocalDate dueDate = PRINCE;
 
 		completeList.add(new Book(title, author, availability, dueDate, genre));
 
-		System.out.println("Would you like to add/donate another book?(Y for yes, any other key returns to main menu)");
+		System.out
+				.print("Would you like to add another book to donate? (Y for yes, any other key returns to main menu)");
 		String userContinue = userInput.next();
 		userInput.nextLine();
 

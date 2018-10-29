@@ -57,17 +57,15 @@ public class LibraryApp {
 				// calls method to search books by author
 				searchByAuthor(completeList, userInput);
 				break;
-			case 4:// **discuss user case input to get result
-					// calls method to find keywords
+			case 4:
+				// calls method to find keywords
 				keywordInBooklist(completeList);
 				break;
 			case 5:
-				// TODO possibly just make a list of books that are currently onshelf??
 				// calls method to check out book
 				completeList = checkOutBook(completeList, userInput);
 				break;
-			case 6: // does not let user continue
-				// TODO possibly just make a list of books that are currently check out??
+			case 6:
 				// allows user to return a book
 				completeList = returnBook(completeList, userInput);
 				break;
@@ -84,10 +82,7 @@ public class LibraryApp {
 		} while (userResponse != 8);
 
 		userInput.close();
-	}/*
-		 * if (Arrays.equals(array1, array2)) { System.out.println("EQUAL"); } else {
-		 * System.out.println("NOT EQUAL");
-		 */// layout we can use for book availability
+	}
 
 	public static void printOutBooks(List<Book> completeList) throws IOException, ParseException {
 
@@ -102,7 +97,6 @@ public class LibraryApp {
 	}
 
 	public static void genreList(List<Book> completeList) {
-		// TODO create a validator in user input that user may only enter 5 genres if
 		// adding a book
 		String[] genresIncluded = new String[5];
 		String singleGenre = null;
@@ -114,7 +108,7 @@ public class LibraryApp {
 		// book
 		for (Book book : completeList) {
 			singleGenre = book.getGenre();
-			genresIncluded = singleGenre.split(", "); // allows for 5 possible genres per book
+			genresIncluded = singleGenre.split(", "); // validator allows for 5 possible genres per book
 
 			// sorts through the string array to add possible genres (unless they're null)
 			// to a hashset to account for duplicates
@@ -132,17 +126,19 @@ public class LibraryApp {
 		}
 
 		List<String> listOfGenres = setOfGenres.stream().collect(Collectors.toList());
+		System.out.println();
 		System.out.print("What genre would you like to search by: ");
 		int userSearch = userInput.nextInt();
 		String genre = listOfGenres.get(userSearch - 1);
 		System.out.print("Books in " + genre.toLowerCase() + ": \n");
 		searchBooks(completeList, genre);
 
-		System.out.print("Search by another author? (Y for yes, any other key returns to main menu)");
+		// calls method again if user answers starting with y
+		System.out.print("Search by another author? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
 
-		if (userContinue.equalsIgnoreCase("Y")) {
+		if (userContinue.toLowerCase().startsWith("y")) {
 			genreList(completeList);
 		}
 
@@ -192,21 +188,19 @@ public class LibraryApp {
 			}
 		} while (!isValid);
 
-		System.out.print("Perform another search? (Y for yes, any other key returns to main menu)");
+		// calls method again if user answers starting with y
+		System.out.print("Perform another search? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
 
-		if (userContinue.equalsIgnoreCase("Y")) {
+		if (userContinue.toLowerCase().startsWith("y")) {
 			keywordInBooklist(completeList);
 		}
 
 	}
 
 	public static void searchBooks(List<Book> completeList, String search) {
-
 		List<Book> searchedBookList = new ArrayList<>();
-		// TODO do we want to keep getAuthor and getTitle as equals or change them to
-		// "contains"
 
 		for (Book sortBook : completeList) {
 			if (sortBook.getGenre().equals(search) || sortBook.getAuthor().equals(search)
@@ -237,11 +231,12 @@ public class LibraryApp {
 		completeList.stream().filter(b -> b.getAuthor().toLowerCase().equals(authorName))
 				.forEach(b -> System.out.println(b.toString()));
 
-		System.out.print("Search by another author? (Y for yes, any other key returns to main menu)");
+		// calls method again if user answers starting with y
+		System.out.print("Search by another author? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
 
-		if (userContinue.equalsIgnoreCase("Y")) {
+		if (userContinue.toLowerCase().startsWith("y")) {
 			searchByAuthor(completeList, userInput);
 		}
 	}
@@ -253,7 +248,7 @@ public class LibraryApp {
 		// user know
 		printOutBooks(completeList);
 
-		System.out.print("\nWhich book would you like to check out? ");
+		System.out.print("\nWhich book would you like to check out? (Please select a number) ");
 		int choice = Validator.getChoice(userInput);
 		while (choice < 1 || choice > completeList.size()) {
 			System.out.print("Enter valid entry from book list: ");
@@ -273,11 +268,13 @@ public class LibraryApp {
 					+ ourBook.getDueDate() + ".");
 		}
 
-		System.out.println("Check out another book?(Y for yes, any other key returns to main menu)");
+		// calls method again if user answers starting with y
+		System.out
+				.println("Would you like to check out another book? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
 
-		if (userContinue.equalsIgnoreCase("Y")) {
+		if (userContinue.toLowerCase().startsWith("y")) {
 			checkOutBook(completeList, userInput);
 		}
 
@@ -305,11 +302,12 @@ public class LibraryApp {
 			System.out.println("That book is already available!");
 		}
 
-		System.out.print("Return another book? (Y for yes, any other key returns to main menu)");
+		// calls method again if user answers starting with y
+		System.out.print("Would you like to return another book? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
 
-		if (userContinue.equalsIgnoreCase("Y")) {
+		if (userContinue.toLowerCase().startsWith("y")) {
 			returnBook(completeList, userInput);
 		}
 
@@ -335,7 +333,7 @@ public class LibraryApp {
 		System.out.print("Please enter the Author's full name: ");
 		String author = Validator.getStringNameRegex(userInput);
 
-		System.out.println("Please enter the genre(s)? Please put a \", \" in-between genres.");
+		System.out.print("Please enter the book's genre(s)? Please put a \", \" in-between genres. ");
 		String genre = Validator.getStringGenreRegex(userInput);
 
 		BookStatus availability = BookStatus.ONSHELF;
@@ -343,12 +341,13 @@ public class LibraryApp {
 
 		completeList.add(new Book(title, author, availability, dueDate, genre));
 
-		System.out
-				.print("Would you like to add another book to donate? (Y for yes, any other key returns to main menu)");
+		// calls method again if user answers starting with y
+		System.out.print(
+				"Would you like to add another book to donate? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
 
-		if (userContinue.equalsIgnoreCase("Y")) {
+		if (userContinue.toLowerCase().startsWith("y")) {
 			addBooks(completeList);
 		}
 

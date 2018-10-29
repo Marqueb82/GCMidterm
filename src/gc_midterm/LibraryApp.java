@@ -142,6 +142,7 @@ public class LibraryApp {
 		System.out.print("Search by another genre? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
+		System.out.println();
 
 		if (userContinue.toLowerCase().startsWith("y")) {
 			genreList(completeList);
@@ -167,13 +168,13 @@ public class LibraryApp {
 				// cycles through the list to add to a new list of just books with that key word
 				for (Book book : completeList) {
 					// sorts either authors or titles
-					if (userResponse.toLowerCase().contains("author".toLowerCase())) {
-						if (book.getAuthor().toLowerCase().contains(userKeyword.toLowerCase())) {
+					if (userResponse.toLowerCase().contains("author")) {
+						if (book.getAuthor().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
 						}
-					} else if (userResponse.toLowerCase().contains("title".toLowerCase())) {
-						if (book.getTitle().toLowerCase().contains(userKeyword.toLowerCase())) {
+					} else if (userResponse.toLowerCase().contains("title")) {
+						if (book.getTitle().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
 						}
@@ -197,6 +198,7 @@ public class LibraryApp {
 		System.out.print("Perform another search? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
+		System.out.println();
 
 		if (userContinue.toLowerCase().startsWith("y")) {
 			keywordInBooklist(completeList);
@@ -240,6 +242,7 @@ public class LibraryApp {
 		System.out.print("Search by another author? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
+		System.out.println();
 
 		if (userContinue.toLowerCase().startsWith("y")) {
 			searchByAuthor(completeList, userInput);
@@ -280,6 +283,7 @@ public class LibraryApp {
 
 		String userContinue = userInput.next();
 		userInput.nextLine();
+		System.out.println();
 
 		if (userContinue.toLowerCase().startsWith("y")) {
 			checkOutBook(completeList, userInput);
@@ -313,6 +317,7 @@ public class LibraryApp {
 		System.out.print("Would you like to return another book? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
+		System.out.println();
 
 		if (userContinue.toLowerCase().startsWith("y")) {
 			returnBook(completeList, userInput);
@@ -413,6 +418,7 @@ public class LibraryApp {
 				"Would you like to add another book to donate? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
+		System.out.println();
 
 		if (userContinue.toLowerCase().startsWith("y")) {
 			addBooks(completeList);

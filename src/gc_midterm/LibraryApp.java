@@ -268,13 +268,14 @@ public class LibraryApp {
 			LocalDate today = LocalDate.now();
 			LocalDate dueDate = today.plus(14, ChronoUnit.DAYS);
 			ourBook.setDueDate(dueDate);
-			System.out.println("\nYou're checking out " + completeList.get(choice - 1).toString());
+			System.out.println("\nYou have checked out: \n" + completeList.get(choice - 1).toString());
 		} else if (completeList.get(choice - 1).getAvailability().equals(BookStatus.CHECKEDOUT)) {
 			System.out.println("Sorry, that book has already been checked out. It is due back to the library "
 					+ ourBook.getDueDate() + ".");
 		}
 
 		// calls method again if user answers starting with y
+		System.out.println("");
 		System.out.println("Would you like to check out another book? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();

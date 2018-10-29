@@ -65,7 +65,7 @@ public class Book {
 	public String toString() {
 		int i = 1;
 
-		return String.format("    %-25s %-20s%n%2d. %-25s %-20s", "Title", "Author", (i++), getTitle(), getAuthor());
+		return String.format("    %-25s %-20s %15s%n%2d. %-25s %-25s %12s", "Title", "Author", "Due Date", (i++), getTitle(), getAuthor(), getDueDate());
 	}
 
 }

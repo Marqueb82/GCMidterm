@@ -1,13 +1,14 @@
 The Good Earth///Pearl S. Buck///CHECKEDOUT///2018-11-11///Parable, Fiction
-The Wasp Factory///Iain Banks///CHECKEDOUT///2018-11-11///Fiction
+The Wasp Factory///Iain Banks///CHECKEDOUT///2018-11-11///Fiction, Horror
 The Alchemist///Paulo Coelho///CHECKEDOUT///2018-12-11///Teen, Fiction
 The New Jim Crow///Michelle Alexander///ONSHELF///1999-01-01///Non-Fiction, Criminal Justice
 1984///George Orwell///ONSHELF///1999-01-01///Fiction, Science Fiction, Classic
 Crime and Punishment///Fyodor Dostoyevsky///CHECKEDOUT///2018-11-11///Fiction, Classic
 Slaughterhouse-Five///Kurt Vonnegut///ONSHELF///1999-01-01///Fiction, Science Fiction
-TestBook///Marque Burg///CHECKEDOUT///2018-11-11///Fiction
-The BigTest///Twani GrandCircus///CHECKEDOUT///2018-11-12///musical
-Mariah's Book///Mariah ofCourse///CHECKEDOUT///2018-11-12///java
-Harry Potter///J. K. Rowling///ONSHELF///1999-01-01///Fiction
-Sherlock Holmes///Arthur C. Doyle///ONSHELF///1999-01-01///Mystery
-Mybook///grand circus///ONSHELF///1999-01-01///fiction
+Tales of the City///Armistead Maupin///ONSHELF///1999-01-01///Fiction, LGBT
+American Psycho///Bret Easton Ellis///CHECKEDOUT///2018-11-21///Fiction, Horror, Classic
+The City and the Pillar///Gore Vidal///ONSHELF///1999-01-01///Fiction, LGBT
+A Colony in a Nation///Chris Hayes///ONSHELF///1999-01-01///Non-Fiction, Criminal Justice
+The Hunger Games///Suzanne Collins///CHECKEDOUT///2018-10-31///Fiction, Teen, Science Fiction
+The Giver///Lois Lowry///ONSHELF///1999-01-01///Fiction, Teen, Science Fiction, Classic
+Americanah///Chimamanda Ngozi Adichie///1999-01-01///Fiction

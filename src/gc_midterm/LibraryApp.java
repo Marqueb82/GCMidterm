@@ -87,7 +87,7 @@ public class LibraryApp {
 	public static void printOutBooks(List<Book> completeList) throws IOException, ParseException {
 
 		System.out.println("Grand Chirpus Inventory: ");
-		System.out.println("==============================");
+		System.out.println("==================================================");
 		System.out.println(String.format("    %-25s %-20s", "Title", "Author"));
 
 		int i = 1;
@@ -134,7 +134,7 @@ public class LibraryApp {
 		searchBooks(completeList, genre);
 
 		// calls method again if user answers starting with y
-		System.out.print("Search by another author? (Y for yes, any other key returns to main menu) ");
+		System.out.print("Search by another genre? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
 
@@ -284,7 +284,7 @@ public class LibraryApp {
 		// checks book at index and sets to onshelf if it was checked out
 		printOutBooks(completeList);
 
-		System.out.print("Which book would you like to check out? ");
+		System.out.print("Which book would you like to return? ");
 		int choice = Validator.getChoice(userInput);
 		while (choice < 1 || choice > completeList.size()) {
 			System.out.print("Enter valid entry from book list: ");

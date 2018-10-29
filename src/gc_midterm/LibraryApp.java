@@ -233,7 +233,7 @@ public class LibraryApp {
 		String authorName = Validator.getStringNameRegex(userInput);
 
 		System.out.println("Books by " + authorName + ": \n");
-		completeList.stream().filter(b -> b.getAuthor().toLowerCase().contains(authorName))
+		completeList.stream().filter(b -> b.getAuthor().toLowerCase().contains(authorName.toLowerCase()))
 				.forEach(b -> System.out.println(b.toString()));
 
 		// calls method again if user answers starting with y

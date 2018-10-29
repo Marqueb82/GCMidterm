@@ -17,6 +17,7 @@ public class LibraryApp {
 	private static Scanner userInput = new Scanner(System.in);
 	private static final LocalDate PRINCE = LocalDate.of(1999, Month.JANUARY, 1);
 
+	
 	public static void main(String[] args) throws IOException, ParseException {
 
 		/***************************************************************************/
@@ -24,6 +25,8 @@ public class LibraryApp {
 		System.out.println("Welcome to Grand Chirpus library!");
 		System.out.println();
 
+		addBooks(completeList);
+		
 		int userResponse;
 
 		do {
@@ -299,5 +302,21 @@ public class LibraryApp {
 
 		btf.rewriteFile(updatedBooks);
 	}
-
+	
+	public static void addBooks(List<Book>completeList) {
+		
+		
+		System.out.println("What's the book's title?");
+		String title = userInput.nextLine();
+		System.out.println("Who is the author?");
+		String author = userInput.nextLine();
+		System.out.println("What is the genre(s)? Please put a \", \" " );
+		String genre = userInput.nextLine();
+		
+		BookStatus availability = BookStatus.ONSHELF;
+		LocalDate dueDate = PRINCE;
+		completeList.add(new Book(title, author, availability, dueDate, genre));
+		
+		System.out.println(completeList);
+	}
 }

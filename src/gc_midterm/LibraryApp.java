@@ -132,7 +132,7 @@ public class LibraryApp {
 
 		List<String> listOfGenres = setOfGenres.stream().collect(Collectors.toList());
 		System.out.println();
-		System.out.print("What genre would you like to search by: ");
+		System.out.print("Enter a whole number associated with the genre: ");
 		int userSearch = Validator.getGenre(userInput);
 		String genre = listOfGenres.get(userSearch - 1);
 		System.out.print("Books in " + genre.toLowerCase() + ": \n");

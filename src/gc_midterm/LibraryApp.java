@@ -167,13 +167,13 @@ public class LibraryApp {
 				// cycles through the list to add to a new list of just books with that key word
 				for (Book book : completeList) {
 					// sorts either authors or titles
-					if (userResponse.toLowerCase().contains("author")) {
-						if (book.getAuthor().toLowerCase().contains(userKeyword)) {
+					if (userResponse.toLowerCase().contains("author".toLowerCase())) {
+						if (book.getAuthor().toLowerCase().contains(userKeyword.toLowerCase())) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
 						}
 					} else if (userResponse.toLowerCase().contains("title")) {
-						if (book.getTitle().toLowerCase().contains(userKeyword)) {
+						if (book.getTitle().toLowerCase().contains(userKeyword.toLowerCase())) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
 						}
@@ -208,8 +208,8 @@ public class LibraryApp {
 		List<Book> searchedBookList = new ArrayList<>();
 
 		for (Book sortBook : completeList) {
-			if (sortBook.getGenre().contains(search) || sortBook.getAuthor().contains(search)
-					|| sortBook.getTitle().contains(search)) {
+			if (sortBook.getGenre().contains(search.toLowerCase()) || sortBook.getAuthor().contains(search.toLowerCase())
+					|| sortBook.getTitle().contains(search.toLowerCase())) {
 				searchedBookList.add(sortBook);
 			}
 		}

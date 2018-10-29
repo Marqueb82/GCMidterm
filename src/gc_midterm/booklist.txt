@@ -5,6 +5,7 @@ The New Jim Crow///Michelle Alexander///ONSHELF///1999-01-01///Non-Fiction, Crim
 1984///George Orwell///ONSHELF///1999-01-01///Fiction, Science Fiction, Classic
 Crime and Punishment///Fyodor Dostoyevsky///CHECKEDOUT///2018-11-11///Fiction, Classic
 Slaughterhouse-Five///Kurt Vonnegut///ONSHELF///1999-01-01///Fiction, Science Fiction
-TestBook///Marque Burg///CHECKEDOUT///2018-11-11///myOwn
+TestBook///Marque Burg///CHECKEDOUT///2018-11-11///Fiction
 The BigTest///Twani GrandCircus///CHECKEDOUT///2018-11-12///musical
-Mariah's Book///Mariah ofCourse///CHECKEDOUT///2018-11-12///java
+Mariah's Book///Mariah ofCourse///CHECKEDOUT///2018-11-12///Teen
+Harry Potter///J. K. Rowling///ONSHELF///1999-01-01///Fiction

@@ -137,6 +137,7 @@ public class LibraryApp {
 			System.out.println(String.format("%2d. %-20s", i, genre));
 			i++;
 		}
+
 	}
 
 	public static void keywordInBooklist(List<Book> completeList) {
@@ -194,6 +195,7 @@ public class LibraryApp {
 	}
 
 	public static void searchBooks(List<Book> completeList, String search) {
+
 		List<Book> searchedBookList = new ArrayList<>();
 		// TODO do we want to keep getAuthor and getTitle as equals or change them to
 		// "contains"
@@ -212,9 +214,13 @@ public class LibraryApp {
 
 	}
 
-	public static void searchByAuthor(List<Book> completeList, Scanner userInput) {
+	public static void searchByAuthor(List<Book> completeList, Scanner userInput) throws IOException, ParseException {
 
-		System.out.print("Enter author's name: ");
+		for (Book b : completeList) {
+			System.out.println(b.getAuthor());
+		}
+
+		System.out.print("\nEnter author's name: ");
 		String authorName = Validator.getStringNameRegex(userInput);
 
 		System.out.println("Books by " + authorName + ": \n");

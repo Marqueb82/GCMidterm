@@ -172,7 +172,7 @@ public class LibraryApp {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
 						}
-					} else if (userResponse.toLowerCase().contains("title")) {
+					} else if (userResponse.toLowerCase().contains("title".toLowerCase())) {
 						if (book.getTitle().toLowerCase().contains(userKeyword.toLowerCase())) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");

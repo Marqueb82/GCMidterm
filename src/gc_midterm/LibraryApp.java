@@ -142,6 +142,7 @@ public class LibraryApp {
 		System.out.print("Search by another genre? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
+		System.out.println();
 
 		if (userContinue.toLowerCase().startsWith("y")) {
 			genreList(completeList);
@@ -168,12 +169,12 @@ public class LibraryApp {
 				for (Book book : completeList) {
 					// sorts either authors or titles
 					if (userResponse.toLowerCase().contains("author")) {
-						if (book.getAuthor().toLowerCase().contains(userKeyword.toLowerCase())) {
+						if (book.getAuthor().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
 						}
 					} else if (userResponse.toLowerCase().contains("title")) {
-						if (book.getTitle().toLowerCase().contains(userKeyword.toLowerCase())) {
+						if (book.getTitle().toLowerCase().contains(userKeyword)) {
 							keywordIncluded.add(book);
 							System.out.println("\n" + book.getTitle() + " by " + book.getAuthor() + "\n");
 						}
@@ -197,6 +198,7 @@ public class LibraryApp {
 		System.out.print("Perform another search? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
+		System.out.println();
 
 		if (userContinue.toLowerCase().startsWith("y")) {
 			keywordInBooklist(completeList);
@@ -208,8 +210,8 @@ public class LibraryApp {
 		List<Book> searchedBookList = new ArrayList<>();
 
 		for (Book sortBook : completeList) {
-			if (sortBook.getGenre().contains(search) || sortBook.getAuthor().contains(search)
-					|| sortBook.getTitle().contains(search)) {
+			if (sortBook.getGenre().contains(search) || sortBook.getAuthor().contains(search.toLowerCase())
+					|| sortBook.getTitle().contains(search.toLowerCase())) {
 				searchedBookList.add(sortBook);
 			}
 		}
@@ -225,21 +227,22 @@ public class LibraryApp {
 
 	public static void searchByAuthor(List<Book> completeList, Scanner userInput) throws IOException, ParseException {
 
-		for (Book b : completeList) {
-			System.out.println(b.getAuthor());
+		for (Book book : completeList) {
+			System.out.println(book.getAuthor());
 		}
 
 		System.out.print("\nEnter author's name: ");
 		String authorName = Validator.getStringNameRegex(userInput);
 
 		System.out.println("Books by " + authorName + ": \n");
-		completeList.stream().filter(b -> b.getAuthor().toLowerCase().contains(authorName.toLowerCase()))
-				.forEach(b -> System.out.println(b.toString()));
+		completeList.stream().filter(book -> book.getAuthor().toLowerCase().contains(authorName.toLowerCase()))
+				.forEach(book -> System.out.println(book.toString()));
 
 		// calls method again if user answers starting with y
 		System.out.print("Search by another author? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
+		System.out.println();
 
 		if (userContinue.toLowerCase().startsWith("y")) {
 			searchByAuthor(completeList, userInput);
@@ -280,6 +283,7 @@ public class LibraryApp {
 
 		String userContinue = userInput.next();
 		userInput.nextLine();
+		System.out.println();
 
 		if (userContinue.toLowerCase().startsWith("y")) {
 			checkOutBook(completeList, userInput);
@@ -313,6 +317,7 @@ public class LibraryApp {
 		System.out.print("Would you like to return another book? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
+		System.out.println();
 
 		if (userContinue.toLowerCase().startsWith("y")) {
 			returnBook(completeList, userInput);
@@ -413,6 +418,7 @@ public class LibraryApp {
 				"Would you like to add another book to donate? (Y for yes, any other key returns to main menu) ");
 		String userContinue = userInput.next();
 		userInput.nextLine();
+		System.out.println();
 
 		if (userContinue.toLowerCase().startsWith("y")) {
 			addBooks(completeList);
